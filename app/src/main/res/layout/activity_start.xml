@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".StartActivity"
+    android:padding="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/easyserv"
+        android:textStyle="bold"
+        android:textSize="35sp"
+        android:textColor="@color/colorNewPrimary"
+        android:layout_marginBottom="30dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:src="@drawable/logo"/>
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:layout_marginTop="10dp"
+        android:id="@+id/login_button_start_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        fancy:fb_borderColor="#FFFFFF"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/colorNewPrimary"
+        fancy:fb_focusColor="@color/colorAccent"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="Войти"
+        fancy:fb_textColor="#FFFFFF"
+        fancy:fb_iconResource="@drawable/ic_person_white"/>
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:layout_marginTop="10dp"
+        android:id="@+id/register_button_start_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        fancy:fb_borderColor="#FFFFFF"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/colorNewPrimary"
+        fancy:fb_focusColor="@color/colorAccent"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="Зарегистрироваться"
+        fancy:fb_textColor="#FFFFFF"
+        fancy:fb_iconResource="@drawable/ic_person_white"/>
+
+</LinearLayout>

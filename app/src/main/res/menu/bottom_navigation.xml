@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/nav_home"
+        android:title="Главная"
+        android:icon="@drawable/ic_home"
+        />
+
+    <item
+        android:id="@+id/nav_search"
+        android:title="Поиск"
+        android:icon="@drawable/ic_search"
+        />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:title="Профиль"
+        android:icon="@drawable/ic_person"
+        />
+
+    <item
+        android:id="@+id/nav_liked"
+        android:title="Избранное"
+        android:icon="@drawable/ic_favorite"
+        />
+
+    <item
+        android:id="@+id/nav_info"
+        android:title="Инфо"
+        android:icon="@drawable/ic_info"
+        />
+
+
+</menu>

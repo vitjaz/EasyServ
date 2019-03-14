@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/easyserv"
+        android:textStyle="bold"
+        android:textSize="35sp"
+        android:textColor="@color/colorNewPrimary"
+        android:layout_marginBottom="30dp"/>
+
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/logo"
+        android:layout_margin="5dp"
+        />
+
+
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:labelText="Электронная почта"
+        app:iconSignifier="@drawable/ic_email"
+        app:useDenseSpacing="true"
+        android:layout_margin="5dp"
+        app:panelBackgroundColor="@android:color/white"
+        app:hasClearButton="true"
+        >
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/email_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            />
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:labelText="Пароль"
+        app:maxCharacters="15"
+        app:minCharacters="6"
+        app:iconSignifier="@drawable/ic_vpn_key"
+        app:useDenseSpacing="true"
+        android:layout_margin="5dp"
+        app:panelBackgroundColor="@android:color/white"
+        app:hasClearButton="true"
+        >
+
+        <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+            android:id="@+id/password_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            />
+
+    </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        fancy:fb_borderColor="#FFFFFF"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/colorNewPrimary"
+        fancy:fb_focusColor="@color/colorAccent"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="Войти"
+        fancy:fb_textColor="#FFFFFF"
+        fancy:fb_iconResource="@drawable/ic_person_white"/>
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Еще нет аккаунта? Тогда зарегистрируйтесь!"
+        android:id="@+id/text_signup"
+        />
+
+</LinearLayout>

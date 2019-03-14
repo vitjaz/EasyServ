@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    tools:context=".Model.PlaceShowActivity"
+    android:fitsSystemWindows="true">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        android:id="@+id/bar">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_theme"
+            android:id="@+id/toolbar"
+            app:theme="@style/BaseTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:fitsSystemWindows="true">
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+                <!--android:layout_width="35dp"-->
+                <!--android:layout_height="35dp"-->
+                <!--android:src="@drawable/logo"-->
+                <!--android:id="@+id/image_place_show" />-->
+
+            <TextView
+                android:id="@+id/title_place_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EasyServ"
+                android:textColor="@android:color/white"
+                android:padding="10dp"
+                android:textSize="20dp" />
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+    
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/bar"
+        android:id="@+id/view_pager">
+
+    </android.support.v4.view.ViewPager>
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/view_pager"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="-43dp" />
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/indicator"
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        card_view:cardCornerRadius="4dp"
+        style="@style/MyCardViewStyle">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:id="@+id/place_show_description"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"/>
+
+</android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card_view_description"
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        card_view:cardCornerRadius="4dp"
+        style="@style/MyCardViewStyle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_access_time"/>
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:id="@+id/place_show_time"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_below="@id/card_view_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:padding="15dp">
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:layout_margin="5dp"
+        android:layout_below="@id/card_view_time"
+        android:id="@+id/call_button"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:background="@drawable/gradient_theme"
+        fancy:fb_borderColor="#FFFFFF"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/colorNewPrimary"
+        fancy:fb_focusColor="@color/colorAccent"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="Позвонить"
+        fancy:fb_textColor="#FFFFFF"
+        fancy:fb_iconResource="@drawable/ic_call"
+        android:layout_centerHorizontal="true"/>
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:layout_margin="5dp"
+        android:layout_below="@id/call_button"
+        android:id="@+id/map_button"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        fancy:fb_borderColor="#FFFFFF"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/colorNewPrimary"
+        fancy:fb_focusColor="@color/colorAccent"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="Метка"
+        fancy:fb_textColor="#FFFFFF"
+        fancy:fb_iconResource="@drawable/map_marker_radius"
+        android:layout_centerHorizontal="true"/>
+
+    </LinearLayout>
+</RelativeLayout>
