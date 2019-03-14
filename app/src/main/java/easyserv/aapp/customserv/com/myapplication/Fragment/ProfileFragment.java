@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -26,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import de.hdodenhof.circleimageview.CircleImageView;
 import easyserv.aapp.customserv.com.myapplication.Model.User;
 import easyserv.aapp.customserv.com.myapplication.R;
+import easyserv.aapp.customserv.com.myapplication.SettingsActivity;
 import easyserv.aapp.customserv.com.myapplication.StartActivity;
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -35,6 +37,7 @@ public class ProfileFragment extends Fragment {
     private FancyButton logoutButton;
     private TextView username;
     private CircleImageView profileImage;
+    private ImageView editProfileImage;
 
     private FirebaseAuth auth;
     private DatabaseReference databaseReference;
@@ -49,6 +52,7 @@ public class ProfileFragment extends Fragment {
         logoutButton = view.findViewById(R.id.logout_button);
         username = view.findViewById(R.id.text_view_profile_username);
         profileImage = view.findViewById(R.id.profile_image);
+        editProfileImage = view.findViewById(R.id.edit_profile_image);
 
         auth = FirebaseAuth.getInstance();
 
@@ -79,6 +83,14 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        editProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(i);
             }
         });
 
