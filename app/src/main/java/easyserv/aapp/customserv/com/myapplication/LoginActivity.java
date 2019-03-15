@@ -29,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     private FancyButton login;
     private TextView txt_signup;
 
+    private int b = 2;
+
     private FirebaseAuth auth;
     private DatabaseReference databaseReference;
 
