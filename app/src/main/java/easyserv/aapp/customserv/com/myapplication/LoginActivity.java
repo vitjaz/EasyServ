@@ -34,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private int b = 2;
 
+    private int NewTestBranchVar;
+
 
     private FirebaseAuth auth;
     private DatabaseReference databaseReference;
