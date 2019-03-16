@@ -33,6 +33,8 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference databaseReference;
 
+
+    private int varA = 0;
     //test comment
 
     @Override
