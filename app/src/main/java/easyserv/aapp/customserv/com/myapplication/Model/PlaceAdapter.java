@@ -17,57 +17,57 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import easyserv.aapp.customserv.com.myapplication.R;
 
-public class PlaceAdapter extends FirestoreRecyclerAdapter<Place, PlaceAdapter.PlaceHolder> implements Filterable {
+public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> implements Filterable {
 
     Context context;
+    ArrayList<Hookah> list;
 
-
-
-    public PlaceAdapter(@NonNull FirestoreRecyclerOptions options) {
-        super(options);
+    public PlaceAdapter(Context context, ArrayList<Hookah> list) {
+        this.context = context;
+        this.list = list;
     }
-
 
     @NonNull
     @Override
-    public PlaceHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_place, viewGroup, false);
-        return new PlaceHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final PlaceHolder holder, int position, @NonNull Place model) {
+    public void onBindViewHolder(@NonNull ViewHolder placeHolder, int i) {
 
-        holder.textViewDescription.setText(model.getDescription());
-        holder.textViewTitle.setText(model.getTitle());
+
+        Hookah hookah = list.get(i);
+        placeHolder.textViewDescription.setText(hookah.getDescription());
+        placeHolder.textViewTitle.setText(hookah.getTitle());
         //holder.circleImageViewPlace.setImageResource(R.mipmap.ic_launcher);
-        Glide.with(context).load(model.getImage()).into(holder.circleImageViewPlace);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(context, PlaceShowActivity.class);
-                DocumentSnapshot snapshot = getSnapshots().getSnapshot(holder.getAdapterPosition());
-                i.putExtra("idsn", snapshot.getId());
-                context.startActivity(i);
-            }
-        });
+        Glide.with(context).load(hookah.getPhoto_1()).into(placeHolder.circleImageViewPlace);
     }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
 
     @Override
     public Filter getFilter() {
         return null;
     }
 
-    class PlaceHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView textViewTitle;
         TextView textViewDescription;
         CircleImageView circleImageViewPlace;
 
-        public PlaceHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             context = itemView.getContext();

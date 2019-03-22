@@ -35,7 +35,7 @@ import qiu.niorgai.StatusBarCompat;
 
 public class PlaceShowActivity extends AppCompatActivity {
 
-    FirebaseFirestore fs = FirebaseFirestore.getInstance();
+    /*FirebaseFirestore fs = FirebaseFirestore.getInstance();
     CollectionReference placeRef = fs.collection("Places");
 
     String s;
@@ -77,24 +77,15 @@ public class PlaceShowActivity extends AppCompatActivity {
         i = getIntent();
         s = i.getStringExtra("idsn");
 
-        placeRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                for(DocumentSnapshot ds: queryDocumentSnapshots){
-                    if(ds.getId().equals(s)){
 
-                        String name = ds.getString("title");
-                        String description = ds.getString("description_2");
-                        String time = ds.getString("time");
+                        String name =
+                        String description =
+                        String time =
                         final String tel = ds.getString("tel");
                         final String map = ds.getString("map");
 
                         String[] imageUrls = new String[]{
-                                ds.getString("photo_1"),
-                                ds.getString("photo_2"),
-                                ds.getString("photo_3"),
-                                ds.getString("photo_4"),
-                                ds.getString("photo_5")
+
                         };
                         //Glide.with(PlaceShowActivity.this).load(ds.getString("image")).into(imageViewToolbar);
                         ViewPagerAdapter adapter = new ViewPagerAdapter(PlaceShowActivity.this, imageUrls);
@@ -122,11 +113,9 @@ public class PlaceShowActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                         });
-                    }
-                }
-            }
-        });
-    }
+
+
+    }*/
 
 
 }
