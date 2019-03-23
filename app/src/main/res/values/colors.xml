@@ -6,4 +6,5 @@
     <color name="colorBlack">#000000</color>
     <color name="colorNewPrimary">#623e95</color>
     <color name="grayLight">#a3a0a0</color>
+    <color name="colorNewWhite">#fff</color>
 </resources>

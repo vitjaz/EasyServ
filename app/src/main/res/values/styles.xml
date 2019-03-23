@@ -26,16 +26,16 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:splitMotionEvents">false</item>
-        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
-        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
-        <item name="android:colorForeground">@color/foreground_material_light</item>
-        <item name="windowActionModeOverlay">true</item>
-        <item name="actionModeStyle">@style/LywActionMode</item>
+        <!--<item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>-->
+        <!--<item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>-->
+        <!--<item name="android:colorForeground">@color/foreground_material_light</item>-->
+        <!--<item name="windowActionModeOverlay">true</item>-->
+        <!--<item name="actionModeStyle">@style/LywActionMode</item>-->
     </style>
 
-    <style name="LywActionMode" parent="Base.Widget.AppCompat.ActionMode">
-        <item name="background">@color/colorPrimary</item>
-        <item name="backgroundSplit">@color/colorPrimary</item>
-    </style>
+    <!--<style name="LywActionMode" parent="Base.Widget.AppCompat.ActionMode">-->
+        <!--<item name="background">@color/colorPrimary</item>-->
+        <!--<item name="backgroundSplit">@color/colorPrimary</item>-->
+    <!--</style>-->
 
 </resources>

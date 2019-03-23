@@ -7,8 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.jaeger.library.StatusBarUtil;
+import com.kelin.translucentbar.library.TranslucentBarManager;
 
 import easyserv.aapp.customserv.com.myapplication.Fragment.FavoritesFragment;
 import easyserv.aapp.customserv.com.myapplication.Fragment.HomeFragment;
@@ -27,10 +30,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StatusBarCompat.translucentStatusBar(this);
+        //StatusBarCompat.translucentStatusBar(this);
+
+        StatusBarUtil.setTransparent(this);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        bottomNavigationView.setLabelVisibilityMode(View.VISIBLE);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
