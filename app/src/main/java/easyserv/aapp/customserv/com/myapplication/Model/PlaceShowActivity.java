@@ -35,7 +35,7 @@ import qiu.niorgai.StatusBarCompat;
 
 public class PlaceShowActivity extends AppCompatActivity {
 
-    /*FirebaseFirestore fs = FirebaseFirestore.getInstance();
+    FirebaseFirestore fs = FirebaseFirestore.getInstance();
     CollectionReference placeRef = fs.collection("Places");
 
     String s;
@@ -75,18 +75,24 @@ public class PlaceShowActivity extends AppCompatActivity {
         mapButton = findViewById(R.id.map_button);
 
         i = getIntent();
-        s = i.getStringExtra("idsn");
 
 
-                        String name =
-                        String description =
-                        String time =
-                        final String tel = ds.getString("tel");
-                        final String map = ds.getString("map");
+
+
+                        String name = i.getStringExtra("title");
+                        String description = i.getStringExtra("description");
+                        String time = i.getStringExtra("time");
+                        final String tel = i.getStringExtra("tel");
+                        final String map = i.getStringExtra("map");
 
                         String[] imageUrls = new String[]{
-
+                                i.getStringExtra("photo_1"),
+                                i.getStringExtra("photo_2"),
+                                i.getStringExtra("photo_3"),
+                                i.getStringExtra("photo_4"),
+                                i.getStringExtra("photo_5")
                         };
+
                         //Glide.with(PlaceShowActivity.this).load(ds.getString("image")).into(imageViewToolbar);
                         ViewPagerAdapter adapter = new ViewPagerAdapter(PlaceShowActivity.this, imageUrls);
                         viewPager.setAdapter(adapter);
@@ -115,7 +121,7 @@ public class PlaceShowActivity extends AppCompatActivity {
                         });
 
 
-    }*/
+    }
 
 
 }
