@@ -128,6 +128,7 @@
     <LinearLayout
         android:layout_below="@id/card_view_time"
         android:layout_width="match_parent"
+        android:id="@+id/ll"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
@@ -177,5 +178,14 @@
         fancy:fb_iconResource="@drawable/map_marker_radius"
         android:layout_centerHorizontal="true"/>
 
+
     </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/ll"
+        android:layout_height="wrap_content"
+        android:id="@+id/frameL">
+
+    </FrameLayout>
 </RelativeLayout>
