@@ -24,10 +24,16 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.jaeger.library.StatusBarUtil;
+import com.kelin.translucentbar.library.TranslucentBarManager;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 
 import easyserv.aapp.customserv.com.myapplication.Model.Hookah;
+=======
+import easyserv.aapp.customserv.com.myapplication.MainActivity;
+>>>>>>> 13dfe5a5817c0eaaa9e65d9dfa0cec384887f490
 import easyserv.aapp.customserv.com.myapplication.Model.Place;
 import easyserv.aapp.customserv.com.myapplication.Model.PlaceAdapter;
 import easyserv.aapp.customserv.com.myapplication.R;
@@ -46,7 +52,21 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+<<<<<<< HEAD
         StatusBarCompat.translucentStatusBar(getActivity());
+=======
+
+
+        //StatusBarCompat.translucentStatusBar(getActivity());
+
+//        TranslucentBarManager translucentBarManager = new TranslucentBarManager(this);
+//        translucentBarManager.translucent(this, view, android.R.color.holo_orange_dark);
+
+        //StatusBarUtil.setTranslucentForImageViewInFragment(getActivity(), null);
+
+        recyclerView = view.findViewById(R.id.recycler_view_home);
+        setUpRecyclerView();
+>>>>>>> 13dfe5a5817c0eaaa9e65d9dfa0cec384887f490
 
         listHookah = new ArrayList<>();
 

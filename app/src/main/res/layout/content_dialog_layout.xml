@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/first_info_item_layout">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/checkbox_marked_circle_outline"
+            android:id="@+id/first_image_info_dialog"
+            android:layout_margin="10dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Получайте 5% бонусов от суммы покупки"
+            android:textSize="16sp"
+            android:layout_toEndOf="@id/first_image_info_dialog"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
+            />
+
+</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/second_info_item_layout"
+        android:layout_below="@id/first_info_item_layout"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/checkbox_marked_circle_outline"
+            android:id="@+id/second_image_info_dialog"
+            android:layout_margin="10dp"
+            />
+
+        <TextView
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="500 бонусов за публикацию отзыва о заведении"
+            android:layout_toEndOf="@id/second_image_info_dialog"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/third_info_item_layout"
+        android:layout_below="@id/second_info_item_layout"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/checkbox_marked_circle_outline"
+            android:id="@+id/third_image_info_dialog"
+            android:layout_margin="10dp"
+            />
+
+        <TextView
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="На праздники"
+            android:layout_toEndOf="@id/third_image_info_dialog"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/third_info_item_layout"
+        android:id="@+id/ok_button_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        fancy:fb_borderColor="#FFFFFF"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/colorNewPrimary"
+        fancy:fb_focusColor="@color/colorAccent"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="Ок"
+        fancy:fb_textColor="#FFFFFF"
+        fancy:fb_iconResource="@drawable/checkbox_marked_circle_outline_white"/>
+
+
+</RelativeLayout>
