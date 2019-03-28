@@ -181,11 +181,11 @@
 
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_below="@id/ll"
-        android:layout_height="wrap_content"
-        android:id="@+id/frameL">
+        android:id="@+id/buttonRev"
+        android:layout_height="wrap_content" />
 
-    </FrameLayout>
+
 </RelativeLayout>

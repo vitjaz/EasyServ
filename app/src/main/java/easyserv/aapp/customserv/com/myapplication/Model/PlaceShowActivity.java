@@ -6,29 +6,45 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
+
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.annotation.Nullable;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import easyserv.aapp.customserv.com.myapplication.PagerAdapter.ViewPagerAdapter;
 import easyserv.aapp.customserv.com.myapplication.R;
+import easyserv.aapp.customserv.com.myapplication.ReviewsActivity;
 import me.relex.circleindicator.CircleIndicator;
 import mehdi.sakout.fancybuttons.FancyButton;
 import qiu.niorgai.StatusBarCompat;
@@ -41,7 +57,14 @@ public class PlaceShowActivity extends AppCompatActivity {
     String s;
     String s1;
     String s2;
+    String userName;
+    String textR;
     Intent i;
+    Button button;
+
+
+    FirebaseUser fUser;
+    DatabaseReference ref;
 
     FancyButton callButton;                 //кнопка для звонка
     FancyButton mapButton;                  //кнопка для карты
@@ -51,7 +74,8 @@ public class PlaceShowActivity extends AppCompatActivity {
     //CircleImageView imageViewToolbar;       //логотип заведения в тулбаре
     ViewPager viewPager;                    //скролинг фоток заведения
     CircleIndicator circleIndicator;        //индикатор для скролера фоток
-    Toolbar toolbar;                        //наш тулбар
+    Toolbar toolbar;//наш тулбар
+
 
 
     @Override
@@ -64,6 +88,18 @@ public class PlaceShowActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        button = findViewById(R.id.buttonRev);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PlaceShowActivity.this, ReviewsActivity.class);
+                startActivity(i);
+            }
+        });
+
+
         StatusBarCompat.translucentStatusBar(this);
         nameView = findViewById(R.id.title_place_show);
         //imageViewToolbar = findViewById(R.id.image_place_show);
@@ -75,7 +111,6 @@ public class PlaceShowActivity extends AppCompatActivity {
         mapButton = findViewById(R.id.map_button);
 
         i = getIntent();
-
 
 
 
@@ -121,7 +156,10 @@ public class PlaceShowActivity extends AppCompatActivity {
                         });
 
 
+
     }
+
+
 
 
 }

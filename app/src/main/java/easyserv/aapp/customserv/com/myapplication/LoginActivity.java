@@ -30,23 +30,9 @@ public class LoginActivity extends AppCompatActivity {
     private TextView txt_signup;
 
 
-
-    private int a = 2;
-
-    private int b = 2;
-
-    private int NewTestBranchVar;
-    private int ReviewBranch;
-
-    private int NewPushBranch;
-
-
-
     private FirebaseAuth auth;
     private DatabaseReference databaseReference;
 
-
-    private int varA = 0;
     //test comment
 
     @Override

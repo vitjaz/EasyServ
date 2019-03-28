@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
 
         //StatusBarUtil.setTranslucentForImageViewInFragment(getActivity(), null);
 
-        recyclerView = view.findViewById(R.id.recycler_view_home);
+
         //setUpRecyclerView();
 
 
