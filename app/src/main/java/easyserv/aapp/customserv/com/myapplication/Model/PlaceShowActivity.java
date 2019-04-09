@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,16 +14,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -48,16 +53,17 @@ public class PlaceShowActivity extends AppCompatActivity {
     TextView descView;                      //описание заведения
     TextView nameView;                      //название заведения
     TextView timeView;                      //время работы заведения
-    //CircleImageView imageViewToolbar;       //логотип заведения в тулбаре
+    //CircleImageView imageViewToolbar;     //логотип заведения в тулбаре
     ViewPager viewPager;                    //скролинг фоток заведения
     CircleIndicator circleIndicator;        //индикатор для скролера фоток
     Toolbar toolbar;                        //наш тулбар
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_show);
+
+
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -127,6 +133,5 @@ public class PlaceShowActivity extends AppCompatActivity {
             }
         });
     }
-
 
 }

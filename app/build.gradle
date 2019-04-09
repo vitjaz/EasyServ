@@ -78,4 +78,6 @@ dependencies {
 
     implementation 'com.yarolegovich:lovely-dialog:1.1.0'
 
+    implementation 'com.bitvale:lavafab:1.0.1'
+
 }
