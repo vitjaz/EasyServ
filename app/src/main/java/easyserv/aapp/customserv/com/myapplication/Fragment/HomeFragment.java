@@ -3,6 +3,8 @@ package easyserv.aapp.customserv.com.myapplication.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,13 +15,25 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.jaeger.library.StatusBarUtil;
 import com.kelin.translucentbar.library.TranslucentBarManager;
 
+
+import java.util.ArrayList;
+
+import easyserv.aapp.customserv.com.myapplication.Model.Hookah;
+
 import easyserv.aapp.customserv.com.myapplication.MainActivity;
+
 import easyserv.aapp.customserv.com.myapplication.Model.Place;
 import easyserv.aapp.customserv.com.myapplication.Model.PlaceAdapter;
 import easyserv.aapp.customserv.com.myapplication.R;
@@ -29,9 +43,7 @@ import qiu.niorgai.StatusBarCompat;
 public class HomeFragment extends Fragment {
 
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference placesRef = db.collection("Places");
-
+    private ArrayList<Hookah> listHookah;
     private PlaceAdapter adapter;
     private RecyclerView recyclerView;
 
@@ -41,6 +53,9 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        StatusBarCompat.translucentStatusBar(getActivity());
+
+
 
         //StatusBarCompat.translucentStatusBar(getActivity());
 
@@ -49,39 +64,56 @@ public class HomeFragment extends Fragment {
 
         //StatusBarUtil.setTranslucentForImageViewInFragment(getActivity(), null);
 
+
+        //setUpRecyclerView();
+
+
+        listHookah = new ArrayList<>();
+
         recyclerView = view.findViewById(R.id.recycler_view_home);
-        setUpRecyclerView();
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        readHookah();
+
 
         return view;
 
     }
 
-    private void setUpRecyclerView() {
+    private void readHookah() {
 
-        Query query = placesRef.orderBy("num", Query.Direction.DESCENDING);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Hookah");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listHookah.clear();
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Hookah hookah = ds.getValue(Hookah.class);
+                    listHookah.add(hookah);
+                }
+                adapter = new PlaceAdapter(getContext(), listHookah);
+                recyclerView.setAdapter(adapter);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        FirestoreRecyclerOptions<Place> options = new FirestoreRecyclerOptions.Builder<Place>()
-                .setQuery(query, Place.class)
-                .build();
-
-        adapter = new PlaceAdapter(options);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+            }
+        });
     }
 
 
     @Override
     public void onStart() {
         super.onStart();
-        adapter.startListening();
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        adapter.stopListening();
+
     }
 
 }

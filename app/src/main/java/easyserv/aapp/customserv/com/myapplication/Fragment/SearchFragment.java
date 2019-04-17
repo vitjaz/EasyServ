@@ -43,7 +43,7 @@ public class SearchFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view_search);
         searchtext = view.findViewById(R.id.search_edit_text);
 
-        setUpRecyclerView();
+        //setUpRecyclerView();
 
         searchtext.addTextChangedListener(new TextWatcher() {
             @Override
@@ -54,7 +54,7 @@ public class SearchFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //setUpRecyclerView(s.toString());
-                searchPlaces(s.toString());
+                //searchPlaces(s.toString());
             }
 
             @Override
@@ -67,7 +67,7 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-    private void searchPlaces(String s) {
+  /*  private void searchPlaces(String s) {
         Query query = placesRef.orderBy("title").startAt(s).endAt(s + "\uf8ff");
 
         FirestoreRecyclerOptions<Place> options = new FirestoreRecyclerOptions.Builder<Place>()
@@ -107,5 +107,5 @@ public class SearchFragment extends Fragment {
     public void onStop() {
         super.onStop();
         adapter.stopListening();
-    }
+    } */
 }
