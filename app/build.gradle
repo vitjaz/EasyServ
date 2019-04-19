@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "easyserv.aapp.customserv.com.myapplication"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -17,10 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '28.0.3'
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support:design:28.0.0'
@@ -32,7 +33,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     //for our firebase
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.google.firebase:firebase-auth:16.1.0'
@@ -40,44 +40,29 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:16.1.0'
     implementation 'com.google.firebase:firebase-firestore:18.1.0'
     implementation 'com.firebaseui:firebase-ui-firestore:4.3.1'
-
     //custom edittext
     implementation 'com.github.HITGIF:TextFieldBoxes:1.4.4'
-
     //custom buttons
     implementation 'com.github.medyo:fancybuttons:1.9.1'
-
     //custom imageView
     implementation 'de.hdodenhof:circleimageview:3.0.0'
-
     api 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
-
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-
     implementation 'me.relex:circleindicator:1.2.2'
-
     implementation 'com.squareup.picasso:picasso:2.71828'
-
     //translucent statusbar
     implementation 'com.kelin.translucentbar:library:0.8.0'
     implementation 'com.jaeger.statusbarutil:library:1.4.0'
-
     implementation('com.github.niorgai:StatusBarCompat:2.1.4', {
         exclude group: 'com.android.support'
     })
-
     //custom button nav
     implementation 'com.chen.wakehao.library:bottom-navigation-bar:1.0.0'
-
     //custom toast
     implementation 'com.github.GrenderG:Toasty:1.4.1'
-
     //targeting of view
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.12.0'
-
     implementation 'com.yarolegovich:lovely-dialog:1.1.0'
-
     implementation 'com.bitvale:lavafab:1.0.1'
-
 }

@@ -50,10 +50,11 @@ public class ReviewsActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
         text = findViewById(R.id.reviewsText);
         button = findViewById(R.id.revBut);
 
-        list = new ArrayList<>();
+
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -72,27 +73,47 @@ public class ReviewsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addReviews();
-                showReviews();
+                //showReviews();
+                readReviews();
             }
         });
+        readReviews();
+        //showReviews();
+    }
 
-        showReviews();
+    private void readReviews() {
+        list = new ArrayList<>();
+        ref = FirebaseDatabase.getInstance().getReference("Hookah").child("Hookah1").child("Reviews");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    ReviewObj review = ds.getValue(ReviewObj.class);
+                    list.add(review);
+                }
+                adapter = new ReviewsAdapter(ReviewsActivity.this, list);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void showReviews() {
+        list = new ArrayList<>();
         ref = FirebaseDatabase.getInstance().getReference("Hookah").child("Hookah1").child("Reviews");
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 list.clear();
-
-
-
                 ReviewObj reviewObj = dataSnapshot.getValue(ReviewObj.class);
                 Toast.makeText(ReviewsActivity.this, "Sender: " + reviewObj.getSender()
                         +"\n Text: " + reviewObj.getText(), Toast.LENGTH_SHORT).show();
                 list.add(reviewObj);
-
                 adapter = new ReviewsAdapter(ReviewsActivity.this, list);
                 recyclerView.setAdapter(adapter);
             }
@@ -125,6 +146,5 @@ public class ReviewsActivity extends AppCompatActivity {
         map.put("sender", userName);
         map.put("text", text.getText().toString());
         ref.push().setValue(map);
-        adapter.notifyDataSetChanged();
     }
 }

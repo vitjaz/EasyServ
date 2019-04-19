@@ -30,17 +30,13 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.reviews_item, viewGroup, false);
         ReviewObj rev = list.get(i);
-        Toast.makeText(context, "Sender: " + rev.getSender(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "Sender: " + rev.getSender(), Toast.LENGTH_SHORT).show();
         return new ReviewsAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
        final ReviewObj reviewObj = list.get(i);
-
-
-
-
 
        viewHolder.nick.setText(reviewObj.getSender());
        viewHolder.text.setText(reviewObj.getText());
@@ -50,8 +46,8 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return 0;
-    }
+        return list.size();
+    }   //было return 0
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

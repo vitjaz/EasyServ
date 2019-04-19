@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="340dp"
+    android:id="@+id/bottom_sheet_reviews"
+    android:background="@android:color/darker_gray"
+    app:behavior_hideable = "false"
+    app:behavior_peekHeight="40dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+    android:elevation="6dp">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorNewPrimary"
+        android:gravity="center"
+        android:text="Забронировать"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Content"
+        android:textColor="@android:color/white" />
+
+
+</LinearLayout>

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //StatusBarCompat.translucentStatusBar(this);
 
-        StatusBarUtil.setTransparent(this);
+        //StatusBarUtil.setTransparent(this);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
