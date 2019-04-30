@@ -4,11 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.FavoritesFragment">
+    tools:context=".Fragment.FavoritesFragment"
+    android:background="@android:color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         >
 
     <android.support.design.widget.AppBarLayout
@@ -48,9 +49,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/bar"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        android:visibility="gone">
 
     </android.support.v7.widget.RecyclerView>
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/baseline_warning_24"
+            android:layout_centerInParent="true"
+            android:id="@+id/image_warning"
+            />
+
+        <TextView
+            android:id="@+id/first_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Данный раздел находится в разработке"
+            android:layout_below="@id/image_warning"
+            android:layout_centerHorizontal="true"/>
+
 
 </RelativeLayout>
 </FrameLayout>

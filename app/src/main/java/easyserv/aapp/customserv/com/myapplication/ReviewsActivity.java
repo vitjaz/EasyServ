@@ -164,7 +164,7 @@ public class ReviewsActivity extends AppCompatActivity {
         map.put("sender", userName);
         map.put("text", text.getText().toString());
         map.put("image", imageURL);
-        map.put("time", currentTimeAndDate);
+        map.put("dateTime", currentTimeAndDate);
         ref.push().setValue(map);
     }
 }
