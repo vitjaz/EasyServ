@@ -20,9 +20,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
+import easyserv.aapp.customserv.com.myapplication.Model.Hookah;
 import easyserv.aapp.customserv.com.myapplication.Model.ReviewObj;
 import easyserv.aapp.customserv.com.myapplication.Model.ReviewsAdapter;
 import easyserv.aapp.customserv.com.myapplication.Model.User;
@@ -34,6 +37,9 @@ public class ReviewsActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userName;
     String imageURL;
+    String time;
+
+    String currentTimeAndDate;
 
     RecyclerView recyclerView;
     EditText text;
@@ -42,7 +48,7 @@ public class ReviewsActivity extends AppCompatActivity {
     ArrayList<ReviewObj> list;
 
     ReviewsAdapter adapter;
-
+    SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy 'в' HH:mm:ss");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,11 +158,13 @@ public class ReviewsActivity extends AppCompatActivity {
     }
 
     private void addReviews() {
+        currentTimeAndDate = sdf.format(new Date());   //системные дата и время
         ref = FirebaseDatabase.getInstance().getReference("Hookah").child("Hookah1").child("Reviews");
         HashMap<String, String> map = new HashMap<>();
         map.put("sender", userName);
         map.put("text", text.getText().toString());
         map.put("image", imageURL);
+        map.put("time", currentTimeAndDate);
         ref.push().setValue(map);
     }
 }

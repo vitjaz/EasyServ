@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -143,6 +144,8 @@ public class EditProfileActivity extends AppCompatActivity {
         pd.setMessage("Загружаем новое фото");
         pd.show();
 
+
+
         if(mImageUri != null){
             final StorageReference filereference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
 
@@ -193,9 +196,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
         if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            mImageUri = result.getUri();
-
-            uploadImg();
+                mImageUri = result.getUri();
+                uploadImg();
 
 
         }else {

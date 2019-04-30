@@ -44,6 +44,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
        viewHolder.nick.setText(reviewObj.getSender());
        viewHolder.text.setText(reviewObj.getText());
+       viewHolder.time.setText(reviewObj.getDateTime());
        Glide.with(context).load(reviewObj.getImage()).into(viewHolder.imageReviews);
 
     }
@@ -58,6 +59,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
         TextView nick;
         TextView text;
+        TextView time;
         CircleImageView imageReviews;
 
 
@@ -67,6 +69,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
             nick = itemView.findViewById(R.id.NickNameText);
             text = itemView.findViewById(R.id.myReviews);
+            time = itemView.findViewById(R.id.timeReviews);
             imageReviews = itemView.findViewById(R.id.imageReviews);
         }
     }

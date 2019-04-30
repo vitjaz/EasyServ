@@ -8,10 +8,10 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="50dp"
+        android:layout_width="60dp"
         android:src="@mipmap/ic_launcher"
         android:id="@+id/imageReviews"
-        android:layout_height="50dp" />
+        android:layout_height="60dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,5 +32,14 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textColor="@color/colorBlack"/>
+
+    <TextView
+        android:layout_below="@id/NickNameText"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:id="@+id/timeReviews"
+        android:text="time"
+        android:layout_toRightOf="@id/imageReviews"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

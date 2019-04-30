@@ -4,15 +4,25 @@ public class ReviewObj {
     private String sender;
     private String text;
     private String image;
+    private String dateTime;
 
-    public ReviewObj(String sender, String text, String image) {
+    public ReviewObj(String sender, String text, String image, String dateTime) {
         this.sender = sender;
         this.text = text;
         this.image = image;
+        this.dateTime = dateTime;
     }
 
     public ReviewObj() {
 
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getImage() {
