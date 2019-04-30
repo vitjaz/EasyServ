@@ -4,25 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReviewsActivity">
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    tools:context=".ReviewsActivity"
+    android:layout_margin="5dp">
 
     <EditText
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:id="@+id/reviewsText"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:id="@+id/revBut"-->
+        <!--android:layout_toEndOf="@id/reviewsText"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:layout_below="@id/reviewsText"
         android:id="@+id/revBut"
-        android:layout_toEndOf="@id/reviewsText"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        fancy:fb_borderColor="#FFFFFF"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/colorNewPrimary"
+        fancy:fb_focusColor="@color/colorAccent"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="Оставить отзыв"
+        fancy:fb_textColor="#FFFFFF"
+        android:layout_gravity="center"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_below="@id/reviewsText"
+        android:layout_below="@id/revBut"
         android:id="@+id/recycler_view"
-        android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        />
 
 </RelativeLayout>

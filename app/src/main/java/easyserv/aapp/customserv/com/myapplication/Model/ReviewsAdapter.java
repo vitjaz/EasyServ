@@ -5,11 +5,15 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import easyserv.aapp.customserv.com.myapplication.R;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -40,7 +44,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
        viewHolder.nick.setText(reviewObj.getSender());
        viewHolder.text.setText(reviewObj.getText());
-
+       Glide.with(context).load(reviewObj.getImage()).into(viewHolder.imageReviews);
 
     }
 
@@ -54,6 +58,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
         TextView nick;
         TextView text;
+        CircleImageView imageReviews;
 
 
 
@@ -62,6 +67,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
             nick = itemView.findViewById(R.id.NickNameText);
             text = itemView.findViewById(R.id.myReviews);
+            imageReviews = itemView.findViewById(R.id.imageReviews);
         }
     }
 }

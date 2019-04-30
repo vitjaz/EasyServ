@@ -3,12 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:padding="10dp"
+    >
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="50dp"
         android:src="@mipmap/ic_launcher"
-        android:id="@+id/circleImageView"
+        android:id="@+id/imageReviews"
         android:layout_height="50dp" />
 
     <TextView
@@ -16,14 +18,19 @@
         android:id="@+id/NickNameText"
         android:text="123"
         android:layout_below="@id/myReviews"
-        android:layout_toRightOf="@id/circleImageView"
-        android:layout_height="wrap_content" />
+        android:layout_toRightOf="@id/imageReviews"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"/>
 
     <TextView
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
         android:layout_width="wrap_content"
         android:id="@+id/myReviews"
         android:text="123"
-        android:layout_toRightOf="@id/circleImageView"
-        android:layout_height="wrap_content" />
+        android:layout_toRightOf="@id/imageReviews"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"/>
 
 </RelativeLayout>

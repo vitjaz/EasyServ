@@ -3,14 +3,24 @@ package easyserv.aapp.customserv.com.myapplication.Model;
 public class ReviewObj {
     private String sender;
     private String text;
+    private String image;
 
-    public ReviewObj(String sender, String text) {
+    public ReviewObj(String sender, String text, String image) {
         this.sender = sender;
         this.text = text;
+        this.image = image;
     }
 
     public ReviewObj() {
 
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getSender() {

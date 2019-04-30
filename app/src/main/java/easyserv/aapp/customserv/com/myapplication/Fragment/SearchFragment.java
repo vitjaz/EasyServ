@@ -53,8 +53,8 @@ public class SearchFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //setUpRecyclerView(s.toString());
-                //searchPlaces(s.toString());
+//                setUpRecyclerView();
+//                searchPlaces(s.toString());
             }
 
             @Override
@@ -67,45 +67,45 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-  /*  private void searchPlaces(String s) {
-        Query query = placesRef.orderBy("title").startAt(s).endAt(s + "\uf8ff");
-
-        FirestoreRecyclerOptions<Place> options = new FirestoreRecyclerOptions.Builder<Place>()
-                .setQuery(query, Place.class)
-                .build();
-
-        adapter = new PlaceAdapter(options);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
-
-    }
-
-    private void setUpRecyclerView() {
-
-        Query query = placesRef.orderBy("num", Query.Direction.DESCENDING);
-
-
-        FirestoreRecyclerOptions<Place> options = new FirestoreRecyclerOptions.Builder<Place>()
-                .setQuery(query, Place.class)
-                .build();
-
-        adapter = new PlaceAdapter(options);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
-    }
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    } */
+//    private void searchPlaces(String s) {
+//        Query query = placesRef.orderBy("title").startAt(s).endAt(s + "\uf8ff");
+//
+//        FirestoreRecyclerOptions<Place> options = new FirestoreRecyclerOptions.Builder<Place>()
+//                .setQuery(query, Place.class)
+//                .build();
+//
+//        adapter = new PlaceAdapter(options);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        recyclerView.setAdapter(adapter);
+//
+//    }
+//
+//    private void setUpRecyclerView() {
+//
+//        Query query = placesRef.orderBy("num", Query.Direction.DESCENDING);
+//
+//
+//        FirestoreRecyclerOptions<Place> options = new FirestoreRecyclerOptions.Builder<Place>()
+//                .setQuery(query, Place.class)
+//                .build();
+//
+//        adapter = new PlaceAdapter(options);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        recyclerView.setAdapter(adapter);
+//    }
+//
+//
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        adapter.startListening();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        adapter.stopListening();
+//    }
 }

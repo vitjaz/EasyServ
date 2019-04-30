@@ -40,8 +40,12 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
+    <RelativeLayout
+        android:layout_below="@+id/bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <!--блять-->
+
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/scroll"
         android:layout_width="wrap_content"
@@ -51,7 +55,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <!--эта хуйня съедет под тулбар-->
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="250dp"
@@ -67,19 +70,6 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="-43dp" />
 
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/indicator"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="-27dp"
-        android:layout_marginRight="5dp"
-        android:background="@color/colorNewPrimary"
-        app:backgroundTint="@color/colorNewPrimary"
-        android:src="@drawable/ic_adb"
-        app:fabSize="normal" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/card_view_description"
@@ -205,7 +195,7 @@
         android:layout_margin="5dp"
         android:layout_below="@id/layout"
         android:id="@+id/reviews_button"
-        android:layout_width="155dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
@@ -221,12 +211,37 @@
         fancy:fb_textColor="#FFFFFF"
         fancy:fb_iconResource="@drawable/map_marker_radius"
         android:layout_centerHorizontal="true"/>
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:layout_margin="5dp"
+                android:layout_below="@id/reviews_button"
+                android:id="@+id/reserv_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                fancy:fb_borderColor="#FFFFFF"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_defaultColor="@color/colorNewPrimary"
+                fancy:fb_focusColor="@color/colorAccent"
+                fancy:fb_iconPosition="left"
+                fancy:fb_radius="30dp"
+                fancy:fb_text="Забронировать"
+                fancy:fb_textColor="#FFFFFF"
+                fancy:fb_iconResource="@drawable/map_marker_radius"
+                android:layout_centerHorizontal="true"/>
         </RelativeLayout>
     </ScrollView>
+
+    </RelativeLayout>
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="6dp">
-    <include layout="@layout/bottom_sheet_reviews" />
+    <include layout="@layout/bottom_sheet_reviews"
+        android:visibility="gone"/>
 </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>

@@ -6,11 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="340dp"
     android:id="@+id/bottom_sheet_reviews"
-    android:background="@android:color/darker_gray"
     app:behavior_hideable = "false"
     app:behavior_peekHeight="40dp"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
-    android:elevation="6dp">
+    android:elevation="6dp"
+    android:background="@android:color/white">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
     <TextView
@@ -19,14 +24,87 @@
         android:background="@color/colorNewPrimary"
         android:gravity="center"
         android:text="Забронировать"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textSize="17dp"/>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Content"
-        android:textColor="@android:color/white" />
+        android:layout_gravity="center"
+        android:text="Тут вы можете выбрать необходимые вам параметры"
+        android:padding="5dp"
+        android:textSize="15dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Средний чек: "
+                android:layout_alignParentStart="true"
+                android:textSize="15dp"
+               />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1500р."
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:layout_alignParentEnd="true"
+                android:textSize="15dp"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Самый большой стол:"
+                android:layout_alignParentStart="true"
+                android:textSize="15dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8 человек"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:layout_alignParentEnd="true"
+                android:textSize="15dp"
+                />
+
+        </RelativeLayout>
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:layout_margin="5dp"
+            android:id="@+id/reviews_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_borderWidth="1dp"
+            fancy:fb_defaultColor="@color/colorNewPrimary"
+            fancy:fb_focusColor="@color/colorAccent"
+            fancy:fb_iconPosition="left"
+            fancy:fb_radius="30dp"
+            fancy:fb_text="Забронировать"
+            fancy:fb_textColor="#FFFFFF"
+            android:layout_gravity="center"/>
 
 
+
+    </LinearLayout>
 </LinearLayout>

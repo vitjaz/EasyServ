@@ -1,23 +1,14 @@
 package easyserv.aapp.customserv.com.myapplication.Model;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
-import android.support.design.widget.FloatingActionButton;
+import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,18 +16,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 import easyserv.aapp.customserv.com.myapplication.PagerAdapter.ViewPagerAdapter;
 import easyserv.aapp.customserv.com.myapplication.R;
 import easyserv.aapp.customserv.com.myapplication.ReviewsActivity;
@@ -58,9 +39,11 @@ public class PlaceShowActivity extends AppCompatActivity {
     String textR;
 
 
+    BottomSheetBehavior bottomSheetBehavior;    //поведение нижнего
     FancyButton callButton;                 //кнопка для звонка
     FancyButton mapButton;                  //кнопка для карты
-    FancyButton reviewsButton;               //кнопка для отзывов
+    FancyButton reviewsButton;              //кнопка для отзывов
+    FancyButton reservButton;               //кнопка для брони
     TextView descView;                      //описание заведения
     TextView nameView;                      //название заведения
     TextView timeView;                      //время работы заведения
@@ -68,7 +51,6 @@ public class PlaceShowActivity extends AppCompatActivity {
     ViewPager viewPager;                    //скролинг фоток заведения
     CircleIndicator circleIndicator;        //индикатор для скролера фоток
     Toolbar toolbar;                        //наш тулбар
-    FloatingActionButton fab;               //кнопка вызова щит меню
 
     FirebaseUser fUser;
     DatabaseReference ref;
@@ -98,8 +80,9 @@ public class PlaceShowActivity extends AppCompatActivity {
         callButton = findViewById(R.id.call_button);
         mapButton = findViewById(R.id.map_button);
         reviewsButton = findViewById(R.id.reviews_button);
+        reservButton = findViewById(R.id.reserv_button);
+        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottom_sheet_reviews));
 
-        fab = findViewById(R.id.fab);
 
         i = getIntent();
         s = i.getStringExtra("idsn");
@@ -154,6 +137,51 @@ public class PlaceShowActivity extends AppCompatActivity {
             }
         });
 
+        //показать наше нижнее меню бронирования
+        reservButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new CustomBottomSheetDialogFragment().show(getSupportFragmentManager(), "Dialog");
+            }
+        });
+
+
+        //слушатель на bottom sheet
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(View bottomSheet, int newState) {
+
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    //      bottomSheetHeading.setText(getString(R.string.text_collapse_me));
+                } else {
+                    //     bottomSheetHeading.setText(getString(R.string.text_expand_me));
+                }
+
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_COLLAPSED:
+                        Log.e("Bottom Sheet Behaviour", "STATE_COLLAPSED");
+                        break;
+                    case BottomSheetBehavior.STATE_DRAGGING:
+                        Log.e("Bottom Sheet Behaviour", "STATE_DRAGGING");
+                        break;
+                    case BottomSheetBehavior.STATE_EXPANDED:
+                        Log.e("Bottom Sheet Behaviour", "STATE_EXPANDED");
+                        break;
+                    case BottomSheetBehavior.STATE_HIDDEN:
+                        Log.e("Bottom Sheet Behaviour", "STATE_HIDDEN");
+                        break;
+                    case BottomSheetBehavior.STATE_SETTLING:
+                        Log.e("Bottom Sheet Behaviour", "STATE_SETTLING");
+                        break;
+                }
+            }
+
+
+            @Override
+            public void onSlide(View bottomSheet, float slideOffset) {
+
+            }
+        });
 //        placeRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
 //            @Override
 //            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -213,3 +241,4 @@ public class PlaceShowActivity extends AppCompatActivity {
     }
 
 }
+

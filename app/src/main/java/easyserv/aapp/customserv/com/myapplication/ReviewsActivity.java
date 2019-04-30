@@ -26,16 +26,18 @@ import java.util.HashMap;
 import easyserv.aapp.customserv.com.myapplication.Model.ReviewObj;
 import easyserv.aapp.customserv.com.myapplication.Model.ReviewsAdapter;
 import easyserv.aapp.customserv.com.myapplication.Model.User;
+import mehdi.sakout.fancybuttons.FancyButton;
 
 public class ReviewsActivity extends AppCompatActivity {
 
     DatabaseReference ref;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String userName;
+    String imageURL;
 
     RecyclerView recyclerView;
     EditText text;
-    Button button;
+    FancyButton button;
 
     ArrayList<ReviewObj> list;
 
@@ -61,6 +63,7 @@ public class ReviewsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 userName = user.getUsername();
+                imageURL = user.getImageURL();
             }
 
             @Override
@@ -72,9 +75,17 @@ public class ReviewsActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addReviews();
-                //showReviews();
-                readReviews();
+                if(text.getText().toString().equals(""))
+                {
+                    Toast.makeText(ReviewsActivity.this, "Пустой отзыв оставить нельзя!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    addReviews();
+                    //showReviews();
+                    readReviews();
+                    Toast.makeText(ReviewsActivity.this, "Отзыв добавлен", Toast.LENGTH_SHORT).show();
+                    text.setText("");
+                }
             }
         });
         readReviews();
@@ -145,6 +156,7 @@ public class ReviewsActivity extends AppCompatActivity {
         HashMap<String, String> map = new HashMap<>();
         map.put("sender", userName);
         map.put("text", text.getText().toString());
+        map.put("image", imageURL);
         ref.push().setValue(map);
     }
 }
