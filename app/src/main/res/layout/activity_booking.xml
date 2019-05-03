@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookingActivity"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        android:id="@+id/bar_booking">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_theme"
+            app:theme="@style/BaseTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:fitsSystemWindows="true">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Бронирование"
+                android:textColor="@android:color/white"
+                android:padding="10dp"
+                android:textSize="20sp" />
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_below="@id/bar_booking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:id="@+id/first_rel">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Название заведения:"
+                    android:layout_alignParentStart="true"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_name_booking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="15dp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_below="@id/first_rel"
+                android:id="@+id/second_rel">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Самый большой стол:"
+                    android:layout_alignParentStart="true"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_max_person_booking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="15dp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_below="@id/second_rel"
+                android:id="@+id/third_rel">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Средний чек:"
+                    android:layout_alignParentStart="true"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_order_booking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="15dp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_below="@id/third_rel"
+                android:id="@+id/fourth_rel">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Выбранное время:"
+                    android:layout_alignParentStart="true"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_time_booking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="15dp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_below="@id/fourth_rel"
+                android:id="@+id/fifth_rel">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Выбранная дата:"
+                    android:layout_alignParentStart="true"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_date_booking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="15dp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_below="@id/fifth_rel"
+                android:id="@+id/six_rel">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Количество гостей:"
+                    android:layout_alignParentStart="true"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_person_booking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="15dp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_below="@id/six_rel"
+                android:id="@+id/seven_rel">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Имя бронирующего:"
+                    android:layout_alignParentStart="true"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_nameOf_booking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="15dp"
+                    />
+
+            </RelativeLayout>
+
+            <!--<studio.carbonylgroup.textfieldboxes.TextFieldBoxes-->
+                <!--android:id="@+id/text123"-->
+                <!--android:layout_below="@id/seven_rel"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:labelText="Имя бронирующего"-->
+                <!--app:useDenseSpacing="true"-->
+                <!--app:hasClearButton="true"-->
+                <!--app:panelBackgroundColor="@android:color/white"-->
+                <!--android:layout_margin="5dp"-->
+                <!--app:maxCharacters="10"-->
+                <!--&gt;-->
+
+                <!--<studio.carbonylgroup.textfieldboxes.ExtendedEditText-->
+                    <!--android:id="@+id/nameOf_booking_et"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--/>-->
+
+            <!--</studio.carbonylgroup.textfieldboxes.TextFieldBoxes>-->
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/seven_rel"
+                android:id="@+id/desc_first_swipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Выберите количество гостей"
+                android:textSize="15dp"
+                android:layout_centerHorizontal="true"
+                />
+
+
+            <com.roughike.swipeselector.SwipeSelector
+                android:layout_below="@id/desc_first_swipe"
+                android:id="@+id/swipePerson"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+
+                android:id="@+id/layout_booking"
+                android:layout_below="@id/swipePerson"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:padding="15dp">
+
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:layout_margin="5dp"
+                    android:id="@+id/time_button"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:background="@drawable/gradient_theme"
+                    fancy:fb_borderColor="#FFFFFF"
+                    fancy:fb_borderWidth="1dp"
+                    fancy:fb_defaultColor="@color/colorNewPrimary"
+                    fancy:fb_focusColor="@color/colorAccent"
+                    fancy:fb_radius="30dp"
+                    fancy:fb_text="Выбрать время"
+                    fancy:fb_textColor="#FFFFFF"
+                    />
+
+                <mehdi.sakout.fancybuttons.FancyButton
+                    android:layout_margin="5dp"
+                    android:id="@+id/date_button"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    fancy:fb_borderColor="#FFFFFF"
+                    fancy:fb_borderWidth="1dp"
+                    fancy:fb_defaultColor="@color/colorNewPrimary"
+                    fancy:fb_focusColor="@color/colorAccent"
+                    fancy:fb_radius="30dp"
+                    android:textAlignment="center"
+                    fancy:fb_text="Выбрать дату"
+                    fancy:fb_textColor="#FFFFFF" />
+
+            </LinearLayout>
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:layout_margin="5dp"
+                android:layout_below="@id/layout_booking"
+                android:id="@+id/reviews_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                fancy:fb_borderColor="#FFFFFF"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_defaultColor="@color/colorNewPrimary"
+                fancy:fb_focusColor="@color/colorAccent"
+                fancy:fb_iconPosition="left"
+                fancy:fb_radius="30dp"
+                fancy:fb_text="Отправить заявку!"
+                fancy:fb_textColor="#FFFFFF"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

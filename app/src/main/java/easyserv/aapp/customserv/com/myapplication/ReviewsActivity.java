@@ -1,14 +1,17 @@
 package easyserv.aapp.customserv.com.myapplication;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,25 +33,27 @@ import easyserv.aapp.customserv.com.myapplication.Model.ReviewObj;
 import easyserv.aapp.customserv.com.myapplication.Model.ReviewsAdapter;
 import easyserv.aapp.customserv.com.myapplication.Model.User;
 import mehdi.sakout.fancybuttons.FancyButton;
+import qiu.niorgai.StatusBarCompat;
 
 public class ReviewsActivity extends AppCompatActivity {
 
-    DatabaseReference ref;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String userName;
-    String imageURL;
-    String time;
+    private DatabaseReference ref;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private String userName;
+    private String imageURL;
+    private String time;
+    private String name;
+    private TextView title;
 
-    String currentTimeAndDate;
+    private RecyclerView recyclerView;
+    private EditText text;
+    private FancyButton button;
 
-    RecyclerView recyclerView;
-    EditText text;
-    FancyButton button;
-
-    ArrayList<ReviewObj> list;
+    private ArrayList<ReviewObj> list;
+    private Intent i;
 
     ReviewsAdapter adapter;
-    SimpleDateFormat sdf = new SimpleDateFormat("EEE, MMM d, yyyy 'в' HH:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("d, MMM, yyyy 'в' HH:mm");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +66,19 @@ public class ReviewsActivity extends AppCompatActivity {
 
         text = findViewById(R.id.reviewsText);
         button = findViewById(R.id.revBut);
+        title = findViewById(R.id.title_place_show_review);
+
+        i = getIntent();
+        name = i.getStringExtra("title");
+
+        //работа с тулбаром
+        Toolbar toolbar = findViewById(R.id.toolbar_review);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        StatusBarCompat.translucentStatusBar(this);
+
+        String full_name = "Отзывы о " + name;
+        title.setText(full_name);
 
 
         final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
@@ -158,7 +176,7 @@ public class ReviewsActivity extends AppCompatActivity {
     }
 
     private void addReviews() {
-        currentTimeAndDate = sdf.format(new Date());   //системные дата и время
+        String currentTimeAndDate = sdf.format(new Date());
         ref = FirebaseDatabase.getInstance().getReference("Hookah").child("Hookah1").child("Reviews");
         HashMap<String, String> map = new HashMap<>();
         map.put("sender", userName);

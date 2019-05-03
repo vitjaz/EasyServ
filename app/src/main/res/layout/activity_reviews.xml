@@ -6,9 +6,38 @@
     android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
     tools:context=".ReviewsActivity"
-    android:layout_margin="5dp">
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        android:id="@+id/bar">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_theme"
+            android:id="@+id/toolbar_review"
+            app:theme="@style/BaseTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:fitsSystemWindows="true">
+
+
+            <TextView
+                android:id="@+id/title_place_show_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EasyServ"
+                android:textColor="@android:color/white"
+                android:padding="10dp"
+                android:textSize="20sp" />
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <EditText
+        android:layout_below="@id/bar"
         android:layout_width="match_parent"
         android:id="@+id/reviewsText"
         android:layout_height="wrap_content" />

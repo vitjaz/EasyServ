@@ -62,6 +62,8 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ViewHolder> 
                 i.putExtra("tel", hookah.getTel());
                 i.putExtra("time", hookah.getTime());
                 i.putExtra("title", hookah.getTitle());
+                i.putExtra("order", hookah.getOrder());
+                i.putExtra("max_person", hookah.getMax_person());
                 context.startActivity(i);
             }
         });

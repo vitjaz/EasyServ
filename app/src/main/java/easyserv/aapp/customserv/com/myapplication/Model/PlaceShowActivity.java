@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import easyserv.aapp.customserv.com.myapplication.BookingActivity;
 import easyserv.aapp.customserv.com.myapplication.PagerAdapter.ViewPagerAdapter;
 import easyserv.aapp.customserv.com.myapplication.R;
 import easyserv.aapp.customserv.com.myapplication.ReviewsActivity;
@@ -27,13 +29,13 @@ import qiu.niorgai.StatusBarCompat;
 
 public class PlaceShowActivity extends AppCompatActivity {
 
-    FirebaseFirestore fs = FirebaseFirestore.getInstance();
-    CollectionReference placeRef = fs.collection("Places");
+    private FirebaseFirestore fs = FirebaseFirestore.getInstance();
+    private CollectionReference placeRef = fs.collection("Places");
 
-    String s;
-    String s1;
-    String s2;
-    Intent i;
+    private String s;
+    private String s1;
+    private String s2;
+    private Intent i;
 
     String userName;
     String textR;
@@ -42,25 +44,27 @@ public class PlaceShowActivity extends AppCompatActivity {
     BottomSheetBehavior bottomSheetBehavior;    //поведение нижнего
     FancyButton callButton;                 //кнопка для звонка
     FancyButton mapButton;                  //кнопка для карты
-    FancyButton reviewsButton;              //кнопка для отзывов
-    FancyButton reservButton;               //кнопка для брони
-    TextView descView;                      //описание заведения
-    TextView nameView;                      //название заведения
-    TextView timeView;                      //время работы заведения
+    private FancyButton reviewsButton;              //кнопка для отзывов
+    private FancyButton reservButton;               //кнопка для брони
+    private TextView descView;                      //описание заведения
+    private TextView nameView;                      //название заведения
+    private TextView timeView;                      //время работы заведения
     //CircleImageView imageViewToolbar;     //логотип заведения в тулбаре
-    ViewPager viewPager;                    //скролинг фоток заведения
-    CircleIndicator circleIndicator;        //индикатор для скролера фоток
-    Toolbar toolbar;                        //наш тулбар
+    private ViewPager viewPager;                    //скролинг фоток заведения
+    private CircleIndicator circleIndicator;        //индикатор для скролера фоток
+    private Toolbar toolbar;                        //наш тулбар
 
-    FirebaseUser fUser;
-    DatabaseReference ref;
-
+    private FirebaseUser fUser;
+    private DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_show);
 
+
+        View includedView = findViewById(R.id.includedLayout);
+        View bookingButton = includedView.findViewById(R.id.booking_buttons);
 
 
         toolbar = findViewById(R.id.toolbar);
@@ -81,17 +85,21 @@ public class PlaceShowActivity extends AppCompatActivity {
         mapButton = findViewById(R.id.map_button);
         reviewsButton = findViewById(R.id.reviews_button);
         reservButton = findViewById(R.id.reserv_button);
-        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottom_sheet_reviews));
+        //bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottom_sheet_reviews));
+
 
 
         i = getIntent();
         s = i.getStringExtra("idsn");
 
-        String name = i.getStringExtra("title");
+        final String name = i.getStringExtra("title");
         String description = i.getStringExtra("description");
         String time = i.getStringExtra("time");
         final String tel = i.getStringExtra("tel");
         final String map = i.getStringExtra("map");
+
+        final String order = i.getStringExtra("order");
+        final String max_person = i.getStringExtra("max_person");
 
         String[] imageUrls = new String[]{
                 i.getStringExtra("photo_1"),
@@ -133,6 +141,7 @@ public class PlaceShowActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(PlaceShowActivity.this, ReviewsActivity.class);
+                i.putExtra("title", name);
                 startActivity(i);
             }
         });
@@ -141,47 +150,62 @@ public class PlaceShowActivity extends AppCompatActivity {
         reservButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new CustomBottomSheetDialogFragment().show(getSupportFragmentManager(), "Dialog");
+                //данный код в разработке
+                //                new CustomBottomSheetDialogFragment().show(getSupportFragmentManager(), "Dialog");
+
+                Intent i = new Intent(PlaceShowActivity.this, BookingActivity.class);
+                i.putExtra("name", name);
+                i.putExtra("order", order);
+                i.putExtra("max_person", max_person);
+                startActivity(i);
+            }
+        });
+
+        bookingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PlaceShowActivity.this, BookingActivity.class);
+                startActivity(i);
             }
         });
 
 
         //слушатель на bottom sheet
-        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(View bottomSheet, int newState) {
-
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    //      bottomSheetHeading.setText(getString(R.string.text_collapse_me));
-                } else {
-                    //     bottomSheetHeading.setText(getString(R.string.text_expand_me));
-                }
-
-                switch (newState) {
-                    case BottomSheetBehavior.STATE_COLLAPSED:
-                        Log.e("Bottom Sheet Behaviour", "STATE_COLLAPSED");
-                        break;
-                    case BottomSheetBehavior.STATE_DRAGGING:
-                        Log.e("Bottom Sheet Behaviour", "STATE_DRAGGING");
-                        break;
-                    case BottomSheetBehavior.STATE_EXPANDED:
-                        Log.e("Bottom Sheet Behaviour", "STATE_EXPANDED");
-                        break;
-                    case BottomSheetBehavior.STATE_HIDDEN:
-                        Log.e("Bottom Sheet Behaviour", "STATE_HIDDEN");
-                        break;
-                    case BottomSheetBehavior.STATE_SETTLING:
-                        Log.e("Bottom Sheet Behaviour", "STATE_SETTLING");
-                        break;
-                }
-            }
-
-
-            @Override
-            public void onSlide(View bottomSheet, float slideOffset) {
-
-            }
-        });
+//        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+//            @Override
+//            public void onStateChanged(View bottomSheet, int newState) {
+//
+//                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+//                    //      bottomSheetHeading.setText(getString(R.string.text_collapse_me));
+//                } else {
+//                    //     bottomSheetHeading.setText(getString(R.string.text_expand_me));
+//                }
+//
+//                switch (newState) {
+//                    case BottomSheetBehavior.STATE_COLLAPSED:
+//                        Log.e("Bottom Sheet Behaviour", "STATE_COLLAPSED");
+//                        break;
+//                    case BottomSheetBehavior.STATE_DRAGGING:
+//                        Log.e("Bottom Sheet Behaviour", "STATE_DRAGGING");
+//                        break;
+//                    case BottomSheetBehavior.STATE_EXPANDED:
+//                        Log.e("Bottom Sheet Behaviour", "STATE_EXPANDED");
+//                        break;
+//                    case BottomSheetBehavior.STATE_HIDDEN:
+//                        Log.e("Bottom Sheet Behaviour", "STATE_HIDDEN");
+//                        break;
+//                    case BottomSheetBehavior.STATE_SETTLING:
+//                        Log.e("Bottom Sheet Behaviour", "STATE_SETTLING");
+//                        break;
+//                }
+//            }
+//
+//
+//            @Override
+//            public void onSlide(View bottomSheet, float slideOffset) {
+//
+//            }
+//        });
 //        placeRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
 //            @Override
 //            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {

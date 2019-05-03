@@ -15,7 +15,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/includeLL">
 
 
     <TextView
@@ -87,9 +88,11 @@
                 />
 
         </RelativeLayout>
+
+
         <mehdi.sakout.fancybuttons.FancyButton
             android:layout_margin="5dp"
-            android:id="@+id/reviews_button"
+            android:id="@+id/booking_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"

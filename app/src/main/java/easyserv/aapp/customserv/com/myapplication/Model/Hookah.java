@@ -18,28 +18,28 @@ public class Hookah {
     String title;
 
     //на будущее
-//    String order;
-//    String max_person;
-//
-//    public String getOrder() {
-//        return order;
-//    }
-//
-//    public void setOrder(String order) {
-//        this.order = order;
-//    }
-//
-//    public void setMax_person(String max_person) {
-//        this.max_person = max_person;
-//    }
-//
-//    public String getMax_person() {
-//        return max_person;
-//    }
+    String order;
+    String max_person;
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
+
+    public void setMax_person(String max_person) {
+        this.max_person = max_person;
+    }
+
+    public String getMax_person() {
+        return max_person;
+    }
 
 
 
-    public Hookah(String description, String description_2, String map, String photo_1, String photo_2, String photo_3, String photo_4, String photo_5, String tel, String time, String title, String image) {
+    public Hookah(String description, String description_2, String map, String photo_1, String photo_2, String photo_3, String photo_4, String photo_5, String tel, String time, String title, String image, String order, String max_person) {
         this.description = description;
         this.description_2 = description_2;
         this.map = map;
@@ -52,6 +52,8 @@ public class Hookah {
         this.time = time;
         this.title = title;
         this.image = image;
+        this.order = order;
+        this.max_person = max_person;
     }
 
     public Hookah() {

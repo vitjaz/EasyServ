@@ -241,7 +241,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="6dp">
+
     <include layout="@layout/bottom_sheet_reviews"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:id="@+id/includedLayout"/>
 </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>
