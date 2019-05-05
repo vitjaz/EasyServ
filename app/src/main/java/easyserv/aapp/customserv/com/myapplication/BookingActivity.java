@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,7 +41,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     private SwipeSelector swipeSelector;
 
     private TextView nameInfo, personInfo, orderInfo, dateInfo, timeInfo, person, nameOf;
-    private FancyButton timeButton, dateButton;
+    private FancyButton timeButton, dateButton, bookingButton;
     private ExtendedEditText nameOfEt;
 
     private FirebaseUser user;
@@ -65,6 +66,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
 
         timeButton = findViewById(R.id.time_button);
         dateButton = findViewById(R.id.date_button);
+        bookingButton = findViewById(R.id.booking_button_email);
 
 //        nameOfEt = findViewById(R.id.nameOf_booking_et);  //ввод имени бронирующего, если это понадобится
 
@@ -155,6 +157,22 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             public void onClick(View v) {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(), "date picker");
+            }
+        });
+
+        bookingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("message/rfc822");
+                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"recipient@example.com"});
+                i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+                i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+                try {
+                    startActivity(Intent.createChooser(i, "Send mail..."));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(BookingActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

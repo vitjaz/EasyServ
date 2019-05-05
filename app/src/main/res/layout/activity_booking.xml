@@ -334,7 +334,7 @@
             <mehdi.sakout.fancybuttons.FancyButton
                 android:layout_margin="5dp"
                 android:layout_below="@id/layout_booking"
-                android:id="@+id/reviews_button"
+                android:id="@+id/booking_button_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
