@@ -7,16 +7,26 @@ public class User {
     private String bio;
     private String imageURL;
     private String username;
+    private String password;
 
-    public User(String id, String fullname, String bio, String imageURL, String username) {
+    public User(String id, String fullname, String bio, String imageURL, String username, String password) {
         this.id = id;
         this.fullname = fullname;
         this.bio = bio;
         this.imageURL = imageURL;
         this.username = username;
+        this.password = password;
     }
 
     public User() {
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getId() {

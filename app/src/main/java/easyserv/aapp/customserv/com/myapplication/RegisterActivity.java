@@ -85,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void register(final String username, final String fullname, String email, String password){
+    private void register(final String username, final String fullname, String email, final String password){
 
         progressDialog = new ProgressDialog(RegisterActivity.this);
         progressDialog.setMessage("Минуточку...");
@@ -107,6 +107,7 @@ public class RegisterActivity extends AppCompatActivity {
                             hashMap.put("fullname", fullname);
                             hashMap.put("bio", "");
                             hashMap.put("imageURL", "https://firebasestorage.googleapis.com/v0/b/easyserv-b00ef.appspot.com/o/gYu3KiI7cN4.jpg?alt=media&token=66483395-78f1-4163-bfca-897b31287005");
+                            hashMap.put("password", password);
 
                             databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

@@ -72,7 +72,4 @@ dependencies {
     implementation 'com.roughike:swipe-selector:1.0.6'
     implementation 'com.sun.mail:android-mail:1.5.5'
     implementation 'com.sun.mail:android-activation:1.5.5'
-    implementation files('F:/AndroidProjects/EasyServ/libs/activation.jar')
-    implementation files('F:/AndroidProjects/EasyServ/libs/additionnal.jar')
-    implementation files('F:/AndroidProjects/EasyServ/libs/mail.jar')
 }

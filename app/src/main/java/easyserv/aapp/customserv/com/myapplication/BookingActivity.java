@@ -2,9 +2,11 @@ package easyserv.aapp.customserv.com.myapplication;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -31,6 +33,8 @@ import java.util.Calendar;
 
 import easyserv.aapp.customserv.com.myapplication.Fragment.DatePickerFragment;
 import easyserv.aapp.customserv.com.myapplication.Fragment.TimePickerFragment;
+import easyserv.aapp.customserv.com.myapplication.Model.GMailSender;
+import easyserv.aapp.customserv.com.myapplication.Model.SimpleMail;
 import easyserv.aapp.customserv.com.myapplication.Model.User;
 import mehdi.sakout.fancybuttons.FancyButton;
 import qiu.niorgai.StatusBarCompat;
@@ -48,6 +52,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
     private DatabaseReference ref;
 
     Intent i;
+    String passwordOfUser, currentDate, time, personOf = "1", fullnameOfUser;
 
 
     @Override
@@ -73,12 +78,15 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         swipeSelector =  findViewById(R.id.swipePerson);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
+
         ref = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 nameOf.setText(user.getFullname());
+                passwordOfUser = user.getPassword();
+                fullnameOfUser = user.getFullname();
 
             }
 
@@ -127,14 +135,19 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             public void onItemSelected(SwipeItem item) {
                 switch ((Integer) item.value) {
                     case 0: person.setText("1");
+                    personOf = "1";
                     break;
                     case 1: person.setText("2");
+                    personOf = "2";
                     break;
                     case 2: person.setText("3");
+                    personOf = "3";
                     break;
                     case 3: person.setText("4");
+                    personOf = "4";
                     break;
                     case 4: person.setText("Больше 4");
+                    personOf = "Больше 4";
                     break;
                 }
             }
@@ -163,15 +176,46 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
         bookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("message/rfc822");
-                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"recipient@example.com"});
-                i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
-                i.putExtra(Intent.EXTRA_TEXT   , "body of email");
-                try {
-                    startActivity(Intent.createChooser(i, "Send mail..."));
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(BookingActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+
+                //дефолтный метод
+//                Intent i = new Intent(Intent.ACTION_SEND);
+//                i.setType("message/rfc822");
+//                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"recipient@example.com"});
+//                i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+//                i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+//                try {
+//                    startActivity(Intent.createChooser(i, "Send mail..."));
+//                } catch (android.content.ActivityNotFoundException ex) {
+//                    Toast.makeText(BookingActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+//                }
+
+                try{
+//                    GMailSender sender = new GMailSender("jameshudsonrandall@gmail.com", "vitalexeev2606q");
+//                    sender.sendMail("Бронь в " + i.getStringExtra("name"),
+//                            "This is Body",
+//                            user.getEmail(),
+//                            "jameshudsonrandall@gmail.com");
+
+                    SimpleMail.sendEmail("develop@customserv.ru",
+                              "Бронь в " + i.getStringExtra("name"),
+                                "Бронь на имя: " + fullnameOfUser + "<br>" +
+                                        "Дата брони: " + currentDate + "<br>" +
+                                        "Время брони: " + time + "<br>" +
+                                        "Количество персон: " + personOf + "<br>" +
+                                        "Email бронирующего: " + user.getEmail());
+
+                    new AlertDialog.Builder(BookingActivity.this)
+                            .setTitle(getResources().getString(R.string.app_name))
+                            .setMessage("Запрос на бронь отправлен")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            }).show();
+                }
+                catch (Exception e){
+                    Toast.makeText(BookingActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -179,7 +223,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            String time = String.valueOf(hourOfDay)+":"+String.valueOf(minute);
+            time = String.valueOf(hourOfDay)+":"+String.valueOf(minute);
             timeInfo.setText(time);
     }
 
@@ -191,7 +235,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
             c.set(Calendar.MONTH, month);
             c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-            String currentDate = java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL).format(c.getTime());
+            currentDate = java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL).format(c.getTime());
             dateInfo.setText(currentDate);
     }
 }
