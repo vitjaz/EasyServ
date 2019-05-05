@@ -123,10 +123,29 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                new LovelyCustomDialog(getContext())
+                        .setView(R.layout.content_dialog_out_layout)
+                        .setTopColorRes(R.color.colorNewPrimary)
+                        .setTitle("Вы хотите выйти?")
+                        .setListener(R.id.exit_button, true, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                auth.signOut();
+                                Intent i = new Intent(getActivity(), StartActivity.class);
+                                startActivity(i);
+                            }
+                        })
+                        .setListener(R.id.not_exit_button, true, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //просто закрываем диалог
+                            }
+                        })
+                        .setIcon(R.drawable.ic_info_outline)
+                        .show();
 
-                auth.signOut();
-                Intent i = new Intent(getActivity(), StartActivity.class);
-                startActivity(i);
+
+
             }
         });
 
@@ -142,7 +161,7 @@ public class ProfileFragment extends Fragment {
                         .setListener(R.id.ok_button_1, true, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
+                                //просто закрываем диалог
                             }
                         })
                         .setIcon(R.drawable.ic_info_outline)
@@ -161,7 +180,7 @@ public class ProfileFragment extends Fragment {
                         .setListener(R.id.ok_button_2, true, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
+                                //просто закрываем диалог
                             }
                         })
                         .setIcon(R.drawable.ic_info_outline)

@@ -6,13 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@drawable/gradient_theme">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
     
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottom"
         android:id="@+id/fragment_container"
-        android:fitsSystemWindows="true"/>
+        android:fitsSystemWindows="true">
+    </FrameLayout>
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

@@ -75,7 +75,7 @@ public class ReviewsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_review);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
-        StatusBarCompat.translucentStatusBar(this);
+        //StatusBarCompat.translucentStatusBar(this);
 
         String full_name = "Отзывы о " + name;
         title.setText(full_name);
