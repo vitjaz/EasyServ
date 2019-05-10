@@ -91,21 +91,10 @@ public class ProfileFragment extends Fragment {
         TapTargetView.showFor(getActivity(),
                 TapTarget.forView(view.findViewById(R.id.edit_profile_image), "Иконка редактирования", "Позволит вам отредактировать профиль"));
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
-
-        //загрузка даты юзера
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        readuser(new MyCallback() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                Toast.makeText(getContext(), "User:" + user.getId(), Toast.LENGTH_SHORT).show();
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void OnCallback(User user) {
+                Toast.makeText(getContext(), "UserName: " + user.getUsername(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -192,11 +181,39 @@ public class ProfileFragment extends Fragment {
         });
 
 
+
         return view;
     }
 
+    private void readuser(final MyCallback callback) {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
+
+        //загрузка даты юзера
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    User user = dataSnapshot.getValue(User.class);
+
+                    callback.OnCallback(user);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    private interface MyCallback {
+        void OnCallback(User user);
+    }
 
 }
+
+
 
 
 
