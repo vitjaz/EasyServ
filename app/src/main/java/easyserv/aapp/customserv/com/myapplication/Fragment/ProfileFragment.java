@@ -45,7 +45,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 public class ProfileFragment extends Fragment {
 
     private FancyButton logoutButton;
-    private TextView username, spendBonusInfo, getBonusInfo;
+    private TextView username, spendBonusInfo, getBonusInfo, phoneText;
     private FancyButton clickOK_1, clickOK_2;
     private CircleImageView profileImage;
     private ImageView editProfileImage;
@@ -63,6 +63,7 @@ public class ProfileFragment extends Fragment {
         logoutButton = view.findViewById(R.id.logout_button);
         username = view.findViewById(R.id.text_view_profile_username);
         profileImage = view.findViewById(R.id.profile_image);
+        phoneText = view.findViewById(R.id.phoneNumberId);
         editProfileImage = view.findViewById(R.id.edit_profile_image);
         spendBonusInfo = view.findViewById(R.id.tv_spend_bonus);
         getBonusInfo = view.findViewById(R.id.tv_get_bonus);
@@ -76,29 +77,30 @@ public class ProfileFragment extends Fragment {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+
         if(firebaseUser != null)
         {
-            //Toasty.info(getContext(), "Мы авторизованы", Toast.LENGTH_SHORT, true).show();
+            Toasty.info(getContext(), "Мы авторизованы", Toast.LENGTH_SHORT, true).show();
         }
         else
         {
-            //Toast.makeText(getContext(), "Мы не авторизованы", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Мы не авторизованы", Toast.LENGTH_SHORT).show();
         }
 
         userId = firebaseUser.getUid();
         TapTargetView.showFor(getActivity(),
                 TapTarget.forView(view.findViewById(R.id.edit_profile_image), "Иконка редактирования", "Позволит вам отредактировать профиль"));
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
 
         //загрузка даты юзера
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
+                Toast.makeText(getContext(), "User:" + user.getId(), Toast.LENGTH_SHORT).show();
 
-                username.setText(user.getUsername());
-                Glide.with(getContext()).load(user.getImageURL()).into(profileImage);
+
             }
 
             @Override

@@ -8,14 +8,16 @@ public class User {
     private String imageURL;
     private String username;
     private String password;
+    private String phoneNumber;
 
-    public User(String id, String fullname, String bio, String imageURL, String username, String password) {
+    public User(String id, String fullname, String bio, String imageURL, String username, String password, String phoneNumber) {
         this.id = id;
         this.fullname = fullname;
         this.bio = bio;
         this.imageURL = imageURL;
         this.username = username;
         this.password = password;
+        this.phoneNumber = phoneNumber;
     }
 
     public User() {
@@ -67,5 +69,13 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

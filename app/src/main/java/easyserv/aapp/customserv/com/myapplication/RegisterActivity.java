@@ -25,7 +25,7 @@ import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private ExtendedEditText username, fullname, email, password;
+    private ExtendedEditText username, fullname, email, password, phoneNumber;
     private FancyButton register;
     private TextView txt_login;
 
@@ -41,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         //editText
         username = findViewById(R.id.username_registration);
         fullname = findViewById(R.id.full_name_registration);
+        phoneNumber = findViewById(R.id.phoneNumber);
         email = findViewById(R.id.email_registration);
         password = findViewById(R.id.password_registration);
 
@@ -69,6 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String str_fullname = fullname.getText().toString();
                 String str_email = email.getText().toString();
                 String str_password = password.getText().toString();
+                String str_phone = phoneNumber.getText().toString();
 
                 if(TextUtils.isEmpty(str_username))
                     username.setError("Нужно заполнить!");
@@ -80,16 +82,18 @@ public class RegisterActivity extends AppCompatActivity {
                     password.setError("Нужно заполнить!");
                 else if(str_password.length() < 6 || str_password.length() > 15)
                     password.setError("Неверное количество символов!");
-                else register(str_username, str_fullname, str_email, str_password);
+                else register(str_username, str_fullname, str_email, str_password, str_phone);
             }
         });
     }
 
-    private void register(final String username, final String fullname, String email, final String password){
+    private void register(final String username, final String fullname, String email, final String password, final String phoneNumber){
 
         progressDialog = new ProgressDialog(RegisterActivity.this);
         progressDialog.setMessage("Минуточку...");
         progressDialog.show();
+
+
 
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
@@ -99,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
                             FirebaseUser firebaseUser = auth.getCurrentUser();
                             String userId = firebaseUser.getUid();
 
-                            databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+                            databaseReference = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
 
                             HashMap<String, Object> hashMap = new HashMap<>();
                             hashMap.put("id", userId);
@@ -108,13 +112,15 @@ public class RegisterActivity extends AppCompatActivity {
                             hashMap.put("bio", "");
                             hashMap.put("imageURL", "https://firebasestorage.googleapis.com/v0/b/easyserv-b00ef.appspot.com/o/gYu3KiI7cN4.jpg?alt=media&token=66483395-78f1-4163-bfca-897b31287005");
                             hashMap.put("password", password);
+                            hashMap.put("phoneNumber", phoneNumber);
 
                             databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
                                         progressDialog.dismiss();
-                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                        Intent intent = new Intent(RegisterActivity.this, PhoneVerification.class);
+                                        intent.putExtra("phone", phoneNumber);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                     }
