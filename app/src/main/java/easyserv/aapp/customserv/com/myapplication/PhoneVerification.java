@@ -53,6 +53,8 @@ public class PhoneVerification extends AppCompatActivity {
         Toast.makeText(this, "Phone: " + phoneNumber, Toast.LENGTH_SHORT).show();
 
 
+
+
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phoneNumber,        // Phone number to verify
                 60,                 // Timeout duration
@@ -89,6 +91,7 @@ public class PhoneVerification extends AppCompatActivity {
                             Intent i = new Intent(PhoneVerification.this, MainActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(i);
+                            finish();
 
                         } else {
 

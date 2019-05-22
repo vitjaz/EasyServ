@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "569606436399-2kcddh7meu4j75gktgrmqfqo83jtpo8m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "easyserv.aapp.customserv.com.myapplication",
+            "certificate_hash": "c82434372faa10b22359f57ee956c535e4c48115"
+          }
+        },
+        {
+          "client_id": "569606436399-52p4il6hkv4e2marcsvj06esv50js16j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "easyserv.aapp.customserv.com.myapplication",
+            "certificate_hash": "e2075113fd72b82124d7b80a57095f76eba9a74d"
+          }
+        },
+        {
           "client_id": "569606436399-mb2e9ib6auld2b16kib8qjv34agqo6rl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -33,20 +49,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "569606436399-msr7qqack7a6h4oaam0crlhlavba34jp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
