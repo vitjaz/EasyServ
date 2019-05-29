@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
+import easyserv.aapp.customserv.com.myapplication.Fragment.ProfileFragment;
 import mehdi.sakout.fancybuttons.FancyButton;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
@@ -100,13 +101,18 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            FirebaseUser firebaseUser = auth.getCurrentUser();
-                            String userId = firebaseUser.getUid();
+                            final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+
+                            databaseReference = FirebaseDatabase.getInstance().getReference().child("user").child(firebaseUser.getUid());
+
+<<<<<<< HEAD
                             databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+=======
+>>>>>>> branch_2
 
                             HashMap<String, Object> hashMap = new HashMap<>();
-                            hashMap.put("id", userId);
+                            hashMap.put("id", firebaseUser.getUid());
                             hashMap.put("username", username);
                             hashMap.put("fullname", fullname);
                             hashMap.put("bio", "");
@@ -121,8 +127,10 @@ public class RegisterActivity extends AppCompatActivity {
                                         progressDialog.dismiss();
                                         Intent intent = new Intent(RegisterActivity.this, PhoneVerification.class);
                                         intent.putExtra("phone", phoneNumber);
+                                        intent.putExtra("id", firebaseUser.getUid());
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
+                                        finish();
                                     }
                                 }
                             });
