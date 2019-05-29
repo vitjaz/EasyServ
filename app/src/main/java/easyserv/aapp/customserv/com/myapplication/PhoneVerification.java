@@ -25,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.concurrent.TimeUnit;
 
+import easyserv.aapp.customserv.com.myapplication.Fragment.HomeFragment;
+import easyserv.aapp.customserv.com.myapplication.Fragment.ProfileFragment;
 import easyserv.aapp.customserv.com.myapplication.Model.User;
 
 
@@ -33,7 +35,6 @@ public class PhoneVerification extends AppCompatActivity {
     EditText editTextCode;
     DatabaseReference reference;
     FirebaseAuth mAuth;
-    FirebaseUser user;
     String codeSent;
     String phoneNumber;
 
@@ -43,7 +44,7 @@ public class PhoneVerification extends AppCompatActivity {
         setContentView(R.layout.activity_phone_verification);
 
         mAuth = FirebaseAuth.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+
 
         editTextCode = findViewById(R.id.editTextCode);
 
@@ -53,12 +54,7 @@ public class PhoneVerification extends AppCompatActivity {
         Toast.makeText(this, "Phone: " + phoneNumber, Toast.LENGTH_SHORT).show();
 
 
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNumber,        // Phone number to verify
-                60,                 // Timeout duration
-                TimeUnit.SECONDS,   // Unit of timeout
-                this,               // Activity (for callback binding)
-                mCallbacks);        // OnVerificationStateChangedCallbacks
+        callingCode();
 
 
 
@@ -68,6 +64,15 @@ public class PhoneVerification extends AppCompatActivity {
                 verifySignInCode();
             }
         });
+    }
+
+    private void callingCode() {
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneNumber,        // Phone number to verify
+                60,                 // Timeout duration
+                TimeUnit.SECONDS,   // Unit of timeout
+                this,               // Activity (for callback binding)
+                mCallbacks);        // OnVerificationStateChangedCallbacks
     }
 
     private void verifySignInCode() {
@@ -85,8 +90,8 @@ public class PhoneVerification extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            Toast.makeText(PhoneVerification.this, "Верификация прошла успешно!: " + user.getUid(), Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(PhoneVerification.this, MainActivity.class);
+                            Toast.makeText(PhoneVerification.this, "Верификация прошла успешно! Пожалуйста авторизируйтесь", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(PhoneVerification.this, LoginActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(i);
 

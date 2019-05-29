@@ -75,9 +75,9 @@ public class ProfileFragment extends Fragment {
 
         auth = FirebaseAuth.getInstance();
 
+
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-
         if(firebaseUser != null)
         {
             Toasty.info(getContext(), "Мы авторизованы", Toast.LENGTH_SHORT, true).show();
@@ -87,20 +87,18 @@ public class ProfileFragment extends Fragment {
             Toast.makeText(getContext(), "Мы не авторизованы", Toast.LENGTH_SHORT).show();
         }
 
-        userId = firebaseUser.getUid();
         TapTargetView.showFor(getActivity(),
                 TapTarget.forView(view.findViewById(R.id.edit_profile_image), "Иконка редактирования", "Позволит вам отредактировать профиль"));
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         //загрузка даты юзера
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                Toast.makeText(getContext(), "User:" + user.getId(), Toast.LENGTH_SHORT).show();
-
-
+                username.setText(user.getUsername());
+                phoneText.setText(user.getPhoneNumber());
             }
 
             @Override
@@ -194,7 +192,6 @@ public class ProfileFragment extends Fragment {
 
         return view;
     }
-
 
 }
 

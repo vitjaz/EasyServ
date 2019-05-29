@@ -103,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
                             FirebaseUser firebaseUser = auth.getCurrentUser();
                             String userId = firebaseUser.getUid();
 
-                            databaseReference = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
+                            databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
 
                             HashMap<String, Object> hashMap = new HashMap<>();
                             hashMap.put("id", userId);
