@@ -31,6 +31,7 @@ import com.yarolegovich.lovelydialog.LovelyCustomDialog;
 import de.hdodenhof.circleimageview.CircleImageView;
 import easyserv.aapp.customserv.com.myapplication.EditProfileActivity;
 
+import easyserv.aapp.customserv.com.myapplication.Model.User;
 import easyserv.aapp.customserv.com.myapplication.R;
 
 import easyserv.aapp.customserv.com.myapplication.StartActivity;
@@ -73,11 +74,9 @@ public class ProfileFragment extends Fragment {
 
         assert getArguments() != null;
 
-        //firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        final FirebaseUser firebaseUser = auth.getCurrentUser();
-        String userId = firebaseUser.getUid();
-        Toast.makeText(getContext(), "user: " + firebaseUser.getUid(), Toast.LENGTH_SHORT).show();
+
+//        Toast.makeText(getContext(), "user: " + firebaseUser.getUid(), Toast.LENGTH_SHORT).show();
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if(firebaseUser != null)
@@ -89,33 +88,26 @@ public class ProfileFragment extends Fragment {
             Toast.makeText(getContext(), "Мы не авторизованы", Toast.LENGTH_SHORT).show();
         }
 
-<<<<<<< HEAD
-        TapTargetView.showFor(getActivity(),
-                TapTarget.forView(view.findViewById(R.id.edit_profile_image), "Иконка редактирования", "Позволит вам отредактировать профиль"));
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-=======
 
         TapTargetView.showFor(getActivity(),
                 TapTarget.forView(view.findViewById(R.id.edit_profile_image), "Иконка редактирования", "Позволит вам отредактировать профиль"));
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("user");
->>>>>>> branch_2
+
+
+        TapTargetView.showFor(getActivity(),
+                TapTarget.forView(view.findViewById(R.id.edit_profile_image), "Иконка редактирования", "Позволит вам отредактировать профиль"));
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
         //загрузка даты юзера
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-<<<<<<< HEAD
+
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
                 phoneText.setText(user.getPhoneNumber());
-=======
 
-                Toast.makeText(getContext(), "count: " + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
-
-
->>>>>>> branch_2
             }
 
             @Override
@@ -212,36 +204,6 @@ public class ProfileFragment extends Fragment {
 
         return view;
     }
-
-<<<<<<< HEAD
-=======
-   /* private void readuser(final MyCallback callback) {
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-
-        //загрузка даты юзера
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-
-                    User user = dataSnapshot.getValue(User.class);
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-
-    private interface MyCallback {
-        void OnCallback(User user);
-    }  */
-
->>>>>>> branch_2
 }
 
 

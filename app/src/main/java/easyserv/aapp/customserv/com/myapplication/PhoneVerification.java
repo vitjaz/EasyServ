@@ -54,9 +54,6 @@ public class PhoneVerification extends AppCompatActivity {
         Toast.makeText(this, "Phone: " + phoneNumber, Toast.LENGTH_SHORT).show();
 
 
-<<<<<<< HEAD
-        callingCode();
-=======
 
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -65,7 +62,7 @@ public class PhoneVerification extends AppCompatActivity {
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
                 mCallbacks);        // OnVerificationStateChangedCallbacks
->>>>>>> branch_2
+
 
 
 
