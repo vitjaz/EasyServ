@@ -94,10 +94,7 @@ public class ProfileFragment extends Fragment {
 
 
 
-        TapTargetView.showFor(getActivity(),
-                TapTarget.forView(view.findViewById(R.id.edit_profile_image), "Иконка редактирования", "Позволит вам отредактировать профиль"));
-
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         //загрузка даты юзера
         databaseReference.addValueEventListener(new ValueEventListener() {
