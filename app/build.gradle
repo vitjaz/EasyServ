@@ -41,6 +41,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.google.firebase:firebase-database:17.0.0'
+    implementation "ru.tinkoff.decoro:decoro:1.1.1"
+    implementation 'ru.egslava:MaskedEditText:1.0.5'
     implementation 'com.google.firebase:firebase-storage:17.0.0'
     implementation 'com.google.firebase:firebase-firestore:19.0.0'
     implementation 'com.firebaseui:firebase-ui-firestore:4.3.1'

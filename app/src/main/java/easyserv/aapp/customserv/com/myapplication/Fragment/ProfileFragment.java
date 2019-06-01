@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
+import com.bumptech.glide.Glide;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -79,14 +79,14 @@ public class ProfileFragment extends Fragment {
 //        Toast.makeText(getContext(), "user: " + firebaseUser.getUid(), Toast.LENGTH_SHORT).show();
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(firebaseUser != null)
+       /* if(firebaseUser != null)
         {
             Toasty.info(getContext(), "Мы авторизованы", Toast.LENGTH_SHORT, true).show();
         }
         else
         {
             Toast.makeText(getContext(), "Мы не авторизованы", Toast.LENGTH_SHORT).show();
-        }
+        } */
 
 
         TapTargetView.showFor(getActivity(),
@@ -104,6 +104,7 @@ public class ProfileFragment extends Fragment {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUsername());
                 phoneText.setText(user.getPhoneNumber());
+                Glide.with(getContext()).load(user.getImageURL()).into(profileImage);
 
             }
 

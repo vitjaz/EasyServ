@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -44,6 +45,7 @@ public class ReviewsActivity extends AppCompatActivity {
     private String time;
     private String name;
     private TextView title;
+    String nameInDb;
 
     private RecyclerView recyclerView;
     private EditText text;
@@ -70,6 +72,8 @@ public class ReviewsActivity extends AppCompatActivity {
 
         i = getIntent();
         name = i.getStringExtra("title");
+        nameInDb = i.getStringExtra("nameInDB");
+        Toast.makeText(this, "hookah: " + nameInDb, Toast.LENGTH_SHORT).show();
 
         //работа с тулбаром
         Toolbar toolbar = findViewById(R.id.toolbar_review);
@@ -118,7 +122,7 @@ public class ReviewsActivity extends AppCompatActivity {
 
     private void readReviews() {
         list = new ArrayList<>();
-        ref = FirebaseDatabase.getInstance().getReference("Hookah").child("Hookah1").child("Reviews");
+        ref = FirebaseDatabase.getInstance().getReference("Hookah").child(nameInDb).child("Reviews");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -126,6 +130,7 @@ public class ReviewsActivity extends AppCompatActivity {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     ReviewObj review = ds.getValue(ReviewObj.class);
                     list.add(review);
+                    Collections.reverse(list);
                 }
                 adapter = new ReviewsAdapter(ReviewsActivity.this, list);
                 recyclerView.setAdapter(adapter);
@@ -140,7 +145,7 @@ public class ReviewsActivity extends AppCompatActivity {
 
     private void showReviews() {
         list = new ArrayList<>();
-        ref = FirebaseDatabase.getInstance().getReference("Hookah").child("Hookah1").child("Reviews");
+        ref = FirebaseDatabase.getInstance().getReference("Hookah").child(nameInDb).child("Reviews");
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -177,7 +182,7 @@ public class ReviewsActivity extends AppCompatActivity {
 
     private void addReviews() {
         String currentTimeAndDate = sdf.format(new Date());
-        ref = FirebaseDatabase.getInstance().getReference("Hookah").child("Hookah1").child("Reviews");
+        ref = FirebaseDatabase.getInstance().getReference("Hookah").child(nameInDb).child("Reviews");
         HashMap<String, String> map = new HashMap<>();
         map.put("sender", userName);
         map.put("text", text.getText().toString());

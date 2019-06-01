@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".PhoneVerification">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo"
+        android:layout_margin="5dp"
+        />
+
 
     <TextView
         android:layout_width="wrap_content"
         android:textSize="25sp"
+        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
         android:text="Введите код подтверждения"
         android:layout_height="wrap_content" />
@@ -21,13 +32,29 @@
         android:layout_width="match_parent"
         android:layout_marginTop="30dp"
         android:id="@+id/editTextCode"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:inputType="number"
+        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:layout_width="match_parent"
+
+    <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/ButtonSignIn"
-        android:layout_below="@+id/editTextCode"
-        android:layout_height="wrap_content" />
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        fancy:fb_borderColor="#FFFFFF"
+        fancy:fb_borderWidth="1dp"
+        fancy:fb_defaultColor="@color/colorNewPrimary"
+        fancy:fb_focusColor="@color/colorAccent"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="30dp"
+        fancy:fb_text="ОТПРАВИТЬ КОД"
+        fancy:fb_textColor="#FFFFFF" />
 
 
-</RelativeLayout>
+</LinearLayout>

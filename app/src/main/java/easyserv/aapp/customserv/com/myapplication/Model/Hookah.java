@@ -20,6 +20,7 @@ public class Hookah {
     //на будущее
     String order;
     String max_person;
+    String nameInDB;
 
     public String getOrder() {
         return order;
@@ -39,7 +40,7 @@ public class Hookah {
 
 
 
-    public Hookah(String description, String description_2, String map, String photo_1, String photo_2, String photo_3, String photo_4, String photo_5, String tel, String time, String title, String image, String order, String max_person) {
+    public Hookah(String description, String description_2, String map, String photo_1, String photo_2, String photo_3, String photo_4, String photo_5, String tel, String time, String title, String image, String order, String max_person, String nameInDB) {
         this.description = description;
         this.description_2 = description_2;
         this.map = map;
@@ -54,6 +55,7 @@ public class Hookah {
         this.image = image;
         this.order = order;
         this.max_person = max_person;
+        this.nameInDB = nameInDB;
     }
 
     public Hookah() {
@@ -154,5 +156,13 @@ public class Hookah {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getNameInDB() {
+        return nameInDB;
+    }
+
+    public void setNameInDB(String nameInDB) {
+        this.nameInDB = nameInDB;
     }
 }

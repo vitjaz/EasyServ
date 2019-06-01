@@ -53,7 +53,7 @@ public class PlaceShowActivity extends AppCompatActivity {
     private ViewPager viewPager;                    //скролинг фоток заведения
     private CircleIndicator circleIndicator;        //индикатор для скролера фоток
     private Toolbar toolbar;                        //наш тулбар
-
+    String nameInDB;
     private FirebaseUser fUser;
     private DatabaseReference ref;
 
@@ -95,6 +95,7 @@ public class PlaceShowActivity extends AppCompatActivity {
         final String name = i.getStringExtra("title");
         String description = i.getStringExtra("description");
         String time = i.getStringExtra("time");
+        nameInDB = i.getStringExtra("nameInDB");
         final String tel = i.getStringExtra("tel");
         final String map = i.getStringExtra("map");
 
@@ -142,6 +143,7 @@ public class PlaceShowActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(PlaceShowActivity.this, ReviewsActivity.class);
                 i.putExtra("title", name);
+                i.putExtra("nameInDB", nameInDB);
                 startActivity(i);
             }
         });

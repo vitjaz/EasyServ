@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,10 @@ import java.util.HashMap;
 
 import easyserv.aapp.customserv.com.myapplication.Fragment.ProfileFragment;
 import mehdi.sakout.fancybuttons.FancyButton;
+import ru.tinkoff.decoro.MaskImpl;
+import ru.tinkoff.decoro.slots.PredefinedSlots;
+import ru.tinkoff.decoro.watchers.FormatWatcher;
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -43,6 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
         username = findViewById(R.id.username_registration);
         fullname = findViewById(R.id.full_name_registration);
         phoneNumber = findViewById(R.id.phoneNumber);
+        phoneNumber.setText("+7");
+        phoneNumber.setSelection(2); /// ставим курсор после +7
         email = findViewById(R.id.email_registration);
         password = findViewById(R.id.password_registration);
 
