@@ -76,8 +76,8 @@
         android:padding="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:src="@mipmap/ic_launcher"
             android:layout_gravity="center"
             android:id="@+id/image_profile_edit"
@@ -97,6 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:labelText="Ваше настоящее имя"
+            android:padding="4dp"
             app:iconSignifier="@drawable/ic_face"
             app:useDenseSpacing="true"
             app:panelBackgroundColor="@android:color/white"
@@ -118,6 +119,7 @@
         <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="4dp"
             app:labelText="Ваш логин"
             app:iconSignifier="@drawable/ic_person"
             app:useDenseSpacing="true"

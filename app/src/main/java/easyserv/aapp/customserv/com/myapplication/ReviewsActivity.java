@@ -85,7 +85,7 @@ public class ReviewsActivity extends AppCompatActivity {
         title.setText(full_name);
 
 
-        final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

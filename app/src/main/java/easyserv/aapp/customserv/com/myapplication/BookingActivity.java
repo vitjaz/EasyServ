@@ -202,6 +202,7 @@ public class BookingActivity extends AppCompatActivity implements TimePickerDial
                                         "Дата брони: " + currentDate + "<br>" +
                                         "Время брони: " + time + "<br>" +
                                         "Количество персон: " + personOf + "<br>" +
+                                        "Телефон бронирующего: " + user.getPhoneNumber() + "<br>" +
                                         "Email бронирующего: " + user.getEmail());
 
                     new AlertDialog.Builder(BookingActivity.this)

@@ -3,6 +3,7 @@ package easyserv.aapp.customserv.com.myapplication.Fragment;
 
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -28,9 +29,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.yarolegovich.lovelydialog.LovelyCustomDialog;
 
 
+import java.net.URISyntaxException;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import easyserv.aapp.customserv.com.myapplication.EditProfileActivity;
 
+import easyserv.aapp.customserv.com.myapplication.MainActivity;
 import easyserv.aapp.customserv.com.myapplication.Model.User;
 import easyserv.aapp.customserv.com.myapplication.R;
 
@@ -46,6 +50,8 @@ public class ProfileFragment extends Fragment {
     private FancyButton clickOK_1, clickOK_2;
     private CircleImageView profileImage;
     private ImageView editProfileImage;
+    public static boolean tab;
+    DatabaseReference databaseReference;
 
     public FirebaseAuth auth;
     public FirebaseUser firebaseUser;
@@ -55,7 +61,8 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        String myValue = this.getArguments() != null ? this.getArguments().getString("message") : null;
+        Toast.makeText(getContext(), "String: " + myValue, Toast.LENGTH_SHORT).show();
         logoutButton = view.findViewById(R.id.logout_button);
         username = view.findViewById(R.id.text_view_profile_username);
         profileImage = view.findViewById(R.id.profile_image);
@@ -72,7 +79,6 @@ public class ProfileFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
 
 
-        assert getArguments() != null;
 
 
 
@@ -88,31 +94,42 @@ public class ProfileFragment extends Fragment {
             Toast.makeText(getContext(), "Мы не авторизованы", Toast.LENGTH_SHORT).show();
         } */
 
+        if(tab) {
 
-        TapTargetView.showFor(getActivity(),
-                TapTarget.forView(view.findViewById(R.id.edit_profile_image), "Иконка редактирования", "Позволит вам отредактировать профиль"));
+            TapTargetView.showFor(getActivity(),
+                    TapTarget.forView(view.findViewById(R.id.edit_profile_image), "Иконка редактирования", "Позволит вам отредактировать профиль"));
+            tab = false;
+            EditProfileActivity.isTab = true;
+        }
+
+        if(firebaseUser != null) {
+
+            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
 
+            //загрузка даты юзера
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
-        //загрузка даты юзера
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    User user = dataSnapshot.getValue(User.class);
+                    if (user != null) {
+                        username.setText(user.getUsername());
+                        phoneText.setText(user.getPhoneNumber());
+                        if (getActivity() != null) {
+                            Glide.with(getActivity()).load(user.getImageURL()).into(profileImage);
+                        }
+                    }
 
-                User user = dataSnapshot.getValue(User.class);
-                username.setText(user.getUsername());
-                phoneText.setText(user.getPhoneNumber());
-                Glide.with(getContext()).load(user.getImageURL()).into(profileImage);
+                }
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+                }
+            });
+        }
 
 
 
@@ -202,6 +219,8 @@ public class ProfileFragment extends Fragment {
 
         return view;
     }
+
+
 }
 
 

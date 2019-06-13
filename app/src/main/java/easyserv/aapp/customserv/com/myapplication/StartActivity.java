@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.yarolegovich.lovelydialog.LovelyCustomDialog;
 
+import easyserv.aapp.customserv.com.myapplication.PagerAdapter.EmptyActivity;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class StartActivity extends AppCompatActivity {
@@ -18,17 +19,10 @@ public class StartActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     private TextView tvWhy;
 
+
     @Override
     protected void onStart() {
         super.onStart();
-
-
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        if(firebaseUser != null) {
-            startActivity(new Intent(StartActivity.this, MainActivity.class));
-            finish();
-        }
     }
 
     @Override

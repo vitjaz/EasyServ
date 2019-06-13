@@ -19,6 +19,7 @@
         android:textColor="@color/colorNewPrimary"
         android:layout_marginBottom="30dp"/>
 
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="96dp"

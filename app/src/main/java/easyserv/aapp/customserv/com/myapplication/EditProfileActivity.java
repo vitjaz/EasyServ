@@ -38,6 +38,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import easyserv.aapp.customserv.com.myapplication.Fragment.ProfileFragment;
 import easyserv.aapp.customserv.com.myapplication.Model.User;
 import es.dmoral.toasty.Toasty;
 import qiu.niorgai.StatusBarCompat;
@@ -51,6 +52,8 @@ public class EditProfileActivity extends AppCompatActivity {
     private TextView change_photo, tv_email;
     private ExtendedEditText username, fullname;
     private FirebaseUser firebaseUser;
+    public static boolean isTab;
+    public ProgressDialog pd;
 
     private Uri mImageUri;
     private StorageTask uploadTask;
@@ -90,9 +93,12 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-        TapTargetView.showFor(this,
-                TapTarget.forView(findViewById(R.id.save_edit_profile), "Кнопка сохранить", "Позволит вам сохранить изменения в профиле")
-        .targetRadius(40));
+        if(isTab) {
+            TapTargetView.showFor(this,
+                    TapTarget.forView(findViewById(R.id.save_edit_profile), "Кнопка сохранить", "Позволит вам сохранить изменения в профиле")
+                            .targetRadius(40));
+            isTab = false;
+        }
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,7 +146,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void uploadImg(){
-        final ProgressDialog pd = new ProgressDialog(this);
+        pd = new ProgressDialog(this);
         pd.setMessage("Загружаем новое фото");
         pd.show();
 
@@ -172,7 +178,6 @@ public class EditProfileActivity extends AppCompatActivity {
                         hashMap.put("imageURL", ""+myUrl);
 
                         databaseReference.updateChildren(hashMap);
-                        pd.dismiss();
 
                         Toasty.success(EditProfileActivity.this, "Фото обновлено!", Toast.LENGTH_SHORT, true).show();
                     } else{
@@ -202,6 +207,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
         }else {
             Toasty.error(EditProfileActivity.this, "Что-то пошло не так", Toast.LENGTH_SHORT, true).show();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (pd!=null && pd.isShowing ()) {
+            pd.dismiss ();
         }
     }
 }

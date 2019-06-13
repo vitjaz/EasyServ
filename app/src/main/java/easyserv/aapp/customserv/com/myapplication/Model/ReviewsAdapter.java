@@ -14,6 +14,13 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -22,6 +29,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
     private Context context;
     private ArrayList<ReviewObj> list;
+    private String imgURL;
 
 
     public ReviewsAdapter(Context context, ArrayList<ReviewObj> rebObj) {
@@ -40,13 +48,14 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+
+
        final ReviewObj reviewObj = list.get(i);
 
        viewHolder.nick.setText(reviewObj.getSender());
        viewHolder.text.setText(reviewObj.getText());
        viewHolder.time.setText(reviewObj.getDateTime());
        Glide.with(context).load(reviewObj.getImage()).into(viewHolder.imageReviews);
-
     }
 
     @Override

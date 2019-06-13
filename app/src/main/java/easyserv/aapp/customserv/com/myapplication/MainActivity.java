@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.jaeger.library.StatusBarUtil;
 import com.kelin.translucentbar.library.TranslucentBarManager;
 
@@ -35,12 +36,30 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Fragment selectedFragment = null;
 
+
     private ProgressBar progressBar;
+    private boolean tab1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        HomeFragment home = new HomeFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, home).commit();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("PREFS", 0);
+        tab1 = sharedPreferences.getBoolean("first_time_start", true);
+        
+        if(tab1) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            Toast.makeText(this, "Мы тут", Toast.LENGTH_SHORT).show();
+            editor.putBoolean("first_time_start", false);
+            editor.commit();
+            ProfileFragment.tab = true;
+        }
+
         //StatusBarCompat.translucentStatusBar(this);
 
         //StatusBarUtil.setTransparent(this);
@@ -53,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+       // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
 
         ConnectivityManager mgr = (ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = mgr.getActiveNetworkInfo();

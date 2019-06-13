@@ -42,4 +42,11 @@
         android:layout_toRightOf="@id/imageReviews"
         android:layout_height="wrap_content" />
 
+    <View
+        android:layout_width="fill_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/timeReviews"
+        android:layout_height="1dp"
+        android:background="#D3D3D3" />
+
 </RelativeLayout>

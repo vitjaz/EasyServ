@@ -115,7 +115,7 @@
             app:hasClearButton="true"
             app:panelBackgroundColor="@android:color/white"
             android:layout_margin="5dp"
-            app:iconSignifier="@drawable/ic_person"
+            app:iconSignifier="@drawable/ic_contact_phone"
             app:maxCharacters="12"
             >
 

@@ -2,6 +2,7 @@ package easyserv.aapp.customserv.com.myapplication;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,12 +19,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
 import easyserv.aapp.customserv.com.myapplication.Fragment.ProfileFragment;
+import easyserv.aapp.customserv.com.myapplication.Model.User;
 import mehdi.sakout.fancybuttons.FancyButton;
 import ru.tinkoff.decoro.MaskImpl;
 import ru.tinkoff.decoro.slots.PredefinedSlots;
@@ -75,23 +81,52 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String str_username = username.getText().toString();
-                String str_fullname = fullname.getText().toString();
-                String str_email = email.getText().toString();
-                String str_password = password.getText().toString();
-                String str_phone = phoneNumber.getText().toString();
 
-                if(TextUtils.isEmpty(str_username))
-                    username.setError("Нужно заполнить!");
-                else if(TextUtils.isEmpty(str_fullname))
-                    fullname.setError("Нужно заполнить!");
-                else if(TextUtils.isEmpty(str_email))
-                    email.setError("Нужно заполнить!");
-                else if(TextUtils.isEmpty(str_password))
-                    password.setError("Нужно заполнить!");
-                else if(str_password.length() < 6 || str_password.length() > 15)
-                    password.setError("Неверное количество символов!");
-                else register(str_username, str_fullname, str_email, str_password, str_phone);
+
+
+                final String str_username = username.getText().toString();
+                final String str_fullname = fullname.getText().toString();
+                final String str_email = email.getText().toString();
+                final String str_password = password.getText().toString();
+                final String str_phone = phoneNumber.getText().toString();
+
+
+
+
+                final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+                ref.orderByChild("phoneNumber").equalTo(phoneNumber.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        if(dataSnapshot.getValue() != null) {
+                            Toast.makeText(RegisterActivity.this, "Номер уже зарегистрирован!", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            if(TextUtils.isEmpty(str_username))
+                                username.setError("Нужно заполнить!");
+                            else if(TextUtils.isEmpty(str_fullname))
+                                fullname.setError("Нужно заполнить!");
+                            else if(TextUtils.isEmpty(str_email))
+                                email.setError("Нужно заполнить!");
+                            else if(str_phone.isEmpty())
+                                phoneNumber.setError("Введите телефон!");
+                            else if(TextUtils.isEmpty(str_password))
+                                password.setError("Нужно заполнить!");
+                            else if(str_password.length() < 6 || str_password.length() > 15)
+                                password.setError("Неверное количество символов!");
+                             else
+                                register(str_username, str_fullname, str_email, str_password, str_phone);
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
             }
         });
     }
@@ -100,53 +135,26 @@ public class RegisterActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(RegisterActivity.this);
         progressDialog.setMessage("Минуточку...");
-        progressDialog.show();
+        try {
+            progressDialog.show();
+        }
+        catch (WindowManager.BadTokenException e) {
+            //use a log message
+        }
 
 
-
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-
-
-
-                            databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(firebaseUser.getUid());
-
-
-                            HashMap<String, Object> hashMap = new HashMap<>();
-                            hashMap.put("id", firebaseUser.getUid());
-                            hashMap.put("username", username);
-                            hashMap.put("fullname", fullname);
-                            hashMap.put("bio", "");
-                            hashMap.put("imageURL", "https://firebasestorage.googleapis.com/v0/b/easyserv-b00ef.appspot.com/o/gYu3KiI7cN4.jpg?alt=media&token=66483395-78f1-4163-bfca-897b31287005");
-                            hashMap.put("password", password);
-                            hashMap.put("phoneNumber", phoneNumber);
-
-                            databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
-                                        progressDialog.dismiss();
-                                        Intent intent = new Intent(RegisterActivity.this, PhoneVerification.class);
-                                        intent.putExtra("phone", phoneNumber);
-                                        intent.putExtra("id", firebaseUser.getUid());
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                }
-                            });
-                        }else{
-                            progressDialog.dismiss();
-                            Toast.makeText(RegisterActivity.this, "Не получилось зарегистрироваться!", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                });
+        Intent intent = new Intent(RegisterActivity.this, PhoneVerification.class);
+        intent.putExtra("phone", phoneNumber);
+        intent.putExtra("name", username);
+        intent.putExtra("email", email);
+        intent.putExtra("fullname", fullname);
+        intent.putExtra("bio", "");
+        intent.putExtra("imageURL", "https://firebasestorage.googleapis.com/v0/b/easyserv-b00ef.appspot.com/o/uploads%2F1560340813628.null?alt=media&token=c151bc77-ce89-4bf2-9fa6-892a8580307d");
+        intent.putExtra("password", password);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        progressDialog.dismiss();
 
     }
+
 }
